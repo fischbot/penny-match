@@ -9,11 +9,8 @@ $(function() {
   var flippedCount = 0;
 
 // note to self: delegate so images created later with jquery can be clicked
-  $('#stage').on('click', '.image', function(event) {
+  $stage.on('click', '.image', function(event) {
     event.preventDefault();
-    console.log($(this)); /* debug */
-    // show image when it's clicked
-    $(this).css('opacity', 1);
 
     // after 2 images are flipped check to see if they match
     // if yes, leave them flipped
@@ -27,7 +24,7 @@ $(function() {
 
     // if grid exists, clear stage children before setting new grid
     if (randomImgs !== []) {
-      $('#stage').empty();
+      $stage.empty();
     }
     setupGrid(4, 3);
     randomImagesToArray(difficulty);
@@ -42,7 +39,7 @@ $(function() {
     difficulty = 12;
     // if grid exists, clear stage children before setting new grid
     if (randomImgs !== []) {
-      $('#stage').empty();
+      $stage.empty();
     }
     setupGrid(4, 6);
     randomImagesToArray(difficulty);
@@ -56,7 +53,7 @@ $(function() {
     difficulty = 18;
     // if grid exists, clear stage children before setting new grid
     if (randomImgs !== []) {
-      $('#stage').empty();
+      $stage.empty();
     }
     setupGrid(6, 6);
     randomImagesToArray(difficulty);
@@ -97,7 +94,7 @@ $(function() {
 
 // set stage grid rows + cols based on difficulty setting
   function setupGrid(cols, rows) {
-    $('#stage').css({
+    $stage.css({
       'grid-template-columns' : 'repeat(' + cols + ', 1fr)',
       'grid-template-rows' : 'repeat(' + rows + ', 1fr)'
     });
@@ -139,7 +136,7 @@ $(function() {
 
   function setupImagesTagsinStage() {
     for (var i = 0; i < difficulty*2; i++) {
-        $('#stage').append('<div class="img-container"><img class="image"></img></div>');
+        $stage.append('<div class="img-container"><img class="image"></img></div>');
     }
   }
 
