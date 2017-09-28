@@ -11,7 +11,7 @@ $(function() {
   var $stage = $('#stage');
   var matched = 0;
 
-// note to self: delegate so images created later with jquery can be clicked
+// note to self: this delegates so images created later with jquery can be clicked
   $stage.on('click', '.image', function(event) {
     event.preventDefault();
 
