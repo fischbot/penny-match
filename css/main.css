@@ -83,3 +83,7 @@ ul li {
   border: 2px solid #eee;
   opacity: 0;
 }
+
+.visible {
+  opacity: 1;
+}
