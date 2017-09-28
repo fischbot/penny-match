@@ -7,11 +7,25 @@ $(function() {
   var shuffledImages = [];
   var totalImages = 27;
   var flippedCount = 0;
+  var flippedImages = [];
+  var $stage = $('#stage');
+  var matched = 0;
 
 // note to self: delegate so images created later with jquery can be clicked
   $stage.on('click', '.image', function(event) {
     event.preventDefault();
 
+    if (flippedCount < 2) {
+      $(this).addClass('visible');
+      var id = this.id;
+      var src = $(this).attr('src');
+      flippedImages.push({id : id, src : src});
+      flippedCount++;
+    }
+
+    if (flippedCount === 2) {
+      checkForMatch();
+    }
     // after 2 images are flipped check to see if they match
     // if yes, leave them flipped
     // if no, flip them back
