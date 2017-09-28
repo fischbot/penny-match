@@ -18,7 +18,7 @@ $(function() {
   });
 
   // set difficulty
-  $('#easy-btn').click(function() {
+  $('#easy-btn').on('click', function() {
     // match 6 images
     difficulty = 6;
 
@@ -34,7 +34,7 @@ $(function() {
     setImgTagValues();
   });
 
-  $('#medium-btn').click(function() {
+  $('#medium-btn').on('click', function() {
     // match 12 images
     difficulty = 12;
     // if grid exists, clear stage children before setting new grid
@@ -48,7 +48,7 @@ $(function() {
     setImgTagSrcs();
   });
 
-  $('#hard-btn').click(function() {
+  $('#hard-btn').on('click', function() {
     // match 24 images
     difficulty = 18;
     // if grid exists, clear stage children before setting new grid
