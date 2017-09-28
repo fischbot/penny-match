@@ -17,6 +17,35 @@ $(function() {
     // if no, flip them back
   });
 
+  function checkForMatch() {
+    // TODO refactor
+    var src1 = flippedImages[0].src;
+    var src2 = flippedImages[1].src;
+    var id1 = flippedImages[0].id.toString();
+    var id2 = flippedImages[1].id;
+
+    // if images are not a match
+    if (flippedImages[0].src !== flippedImages[1].src) {
+
+      // give the user a brief chance to see the images before flipping them
+      // back over
+      setTimeout(function(){
+        // TODO animate this action
+        $(`#${id1}`).removeClass('visible');
+        $(`#${id2}`).removeClass('visible');
+      }, 1000);
+
+    } else {  // if images are a match
+        // leave images flipped over
+        matched++;
+        if (matched === difficulty) {
+          // game over - you win
+        }
+
+    flippedCount = 0;
+    flippedImages = [];
+  }
+
   // set difficulty
   $('#easy-btn').on('click', function() {
     // match 6 images
