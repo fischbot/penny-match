@@ -14,31 +14,29 @@
         <script  src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header>
-          <div class="container">
-            <!-- <h1>Penny the Destroyer</h1> -->
-            <!-- <h2>Matching Game</h2> -->
-            <hr>
-            <nav id="settings">
-              <h4>Difficulty Select:</h4>
-              <ul>
-                <li><button class="difficulty-btn" id="easy-btn">Easy</button></li>
-                <li><button class="difficulty-btn" id="medium-btn">Normal</button></li>
-                <li><button class="difficulty-btn" id="hard-btn">Hard</button></li>
-              </ul>
-
-
-            </nav>
-          </div><!-- /.container -->
-        </header>
-        <div class="container">
-          <div id="stage"></div>
-        </div><!-- /.container -->
-
-        <footer>
-          <div class="container"></div><!-- /.container -->
-        </footer>
         <div id="page">
+          <header>
+            <div class="container">
+                <div class="logo-img" id="logo-img-left">
+                  <img src="img/logo-face.png" alt="logo">
+                </div><!-- /#logo-img-left -->
+                <div id="center">
+                  <h1>Penny Match!</h1>
+                  <div id="settings">
+                    <h4>Difficulty Select:</h4>
+                    <ul>
+                      <li><button class="difficulty-btn" id="easy">Easy</button></li>
+                      <li><button class="difficulty-btn" id="medium">Medium</button></li>
+                      <li><button class="difficulty-btn" id="hard">Hard</button></li>
+                      <!-- <li><button class="difficulty-btn" id="debug">debug</button></li> -->
+                    </ul>
+                  </div><!-- /#settings -->
+                </div>
+                <div class="logo-img" id="logo-img-right">
+                  <img src="img/logo-face.png" alt="logo">
+                </div><!-- /#logo-img-right -->
+            </div><!-- /.container -->
+          </header>
         </div>
         <script src="js/main.js"></script>
     </body>
