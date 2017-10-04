@@ -6,84 +6,184 @@
 
 body {
   font-size: 16px;
+  font-family: sans-serif;
+  background-color: #D67233;
+}
+
+#page {
+  display: flex;
+  flex-direction: column;
+  /* TODO flex grow/shrink */
+  position: relative;
 }
 
 .container {
   width: 80%;
+  max-width: 900px;
   margin: 0 auto;
+  background-color: #E7E5D8;
 }
 
-header {
-  text-align: center;
-  font-variant: small-caps;
+/* =============== HEADER ================== */
+header .container {
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+header h1 {
+  align-self: center;
+  padding: 0 20px;
+  font-size: 4.375em;
 }
 
 header h1 {
   margin: 0;
+  font-family: 'Walter Turncoat', cursive;
+  color: #CA9429;
+  /*text-align: center;*/
+  font-variant: small-caps;
+}
+
+/* =============== Logo ================== */
+#logo-img-right img {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 ul li {
   list-style-type: none;
 }
 
+#center {
+  align-self: center;
+}
+
+/* =============== DIFFICULTY SETTINGS ================== */
 #settings {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 3px 0;
+  margin: 0 20px;
+  background-color: #C5E3C3;
+}
+
+#settings h4 {
+  color: #441E00;
+  margin-right: 20px;
+  letter-spacing: 1px;
+}
+
+#settings h4,
+#settings .difficulty-btn {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.2em;
+}
+#settings ul li {
+  display: inline-block;
+  padding: 0 10px;
 }
 
 #settings .difficulty-btn {
   border: none;
-  padding: 5px 10px;
-  border-radius: 7px;
-  background-color: #3ec8c2;
+  background: none;
   outline: none;
-  color: #fff;
+  color: #38B34A;
   font-variant: normal;
   text-transform: lowercase;
   letter-spacing: 1px;
 }
 
-#settings .btn:hover {
-  background-color: #2a8682;
+#settings .difficulty-btn:hover {
+  color: #E64100;
+  font-weight: bold;
 }
 
-#settings h4 {
-  margin: 5px 0;
+#settings .active {
+  color: #E64100;
+  font-weight: bold;
 }
-
-#settings ul {
-  margin: 5px 0;
-}
-
-#settings ul li {
-  display: inline;
-  padding: 0 5px;
-}
-
-#settings ul li:nth-child(2) {
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+/* =============== MAIN AREA ================== */
+main .container {
+  background-color: #E7E4D8;
+  padding: 100px 0;
+  position: relative;
 }
 
 #stage {
-  max-width: 900px;
-  margin: 100px auto 0;
   display: grid;
-  grid-gap : 20px;
+  grid-gap : 40px;
+  justify-content: center;
 }
 
 .img-container {
   width: 100px;
   height: 100px;
-  background: grey;
+  background: #A55620;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3 )
 }
 
 .image {
-  width: 100px;
-  height: 100px;
-  border: 2px solid #eee;
+  max-width: 100px;
+  max-height: 100px;
+  border: 2px solid #D57132;
   opacity: 0;
+  cursor: pointer;
 }
 
 .visible {
   opacity: 1;
+}
+
+/* =============== GAME OVER ================== */
+#play-again {
+  font-family: 'Amatic SC', cursive;
+  width: 60%;
+  height: 300px;
+  border-radius: 20px;
+  margin: 0 auto;
+  background: #fff;
+  text-align: center;
+  display: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  position: absolute;
+  left: 170px;
+  top: 20%;
+}
+
+#play-again button {
+  font-family: 'Amatic SC', cursive;
+  margin: 0 20px;
+  border-radius: 10px;
+  padding: 10px 15px;;
+  font-size: 1.3em;
+  background-color: #CB9328;
+  border: none;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+#play-again button:hover {
+  background-color: #F26421;
+}
+
+#message {
+  margin: 0 0 20px;
+  font-weight: bold;
+  padding: 50px 0 20px;
+  font-size: 4em;
+  color: #D88054;
+  text-transform: uppercase;
+}
+
+/* =============== FOOTER ================== */
+footer .container {
+  text-align: center;
+  border-top: 1px solid #9F7D5B;
+  padding: 40px 0;
 }
