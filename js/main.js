@@ -60,7 +60,7 @@ $(function() {
 
         $(`#${id1}`).removeClass('visible');
         $(`#${id2}`).removeClass('visible');
-      }, 1000);
+      }, 500);
 
     } else {  // if images are a match
         // leave images flipped over
