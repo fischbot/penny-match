@@ -158,6 +158,30 @@ $(function() {
     $stage.empty();
   }
 
+  var setting = {
+    easy : function() {
+      difficulty = 6;
+      cols = 4;
+      rows = 3;
+    },
+    medium : function() {
+        difficulty = 12;
+        cols = 4;
+        rows = 6;
+    },
+    hard : function() {
+        difficulty = 20;
+        // TODO set cols and rows based on a changing amount of images
+        cols = 5;
+        rows = 8;
+    },
+    debug : function() {
+        difficulty = 2;
+        cols = 2;
+        rows = 1;
+    }
+  };
+
   function shuffleImgs() {
     var imgs = Array.from(randomImgs);
     shuffledImages = imgs.shuffle();
