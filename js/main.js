@@ -63,7 +63,9 @@ $(function() {
       }, 500);
 
     } else {  // if images are a match
-        // leave images flipped over
+        // make them unclickable
+        $(`#${id1}`).addClass('matched');
+        $(`#${id2}`).addClass('matched');
         matched++;
         if (matched === difficulty) {
           // game over - you win
