@@ -126,6 +126,24 @@ $(function() {
     $('#play-again').show();
   }
 
+  $('.play-again-btn').on('click', function(evt) {
+    var btnID = evt.target.id;
+
+    // TODO refactor removing class
+    $('.difficulty-btn').removeClass('active');
+
+    switch (btnID) {
+      case 'yes':
+        $('.difficulty-btn').removeAttr('disabled');
+        $('#play-again').hide();
+        resetAll();
+        break;
+      case 'no':
+        $('#play-again').hide();
+        $stage.remove();
+        $('main .container').append('<p class="message" style="padding-top:0">Thanks for playing!</h2>');
+        $('.message').text('Thanks For Playing!');
+        break;
     }
   });
 
