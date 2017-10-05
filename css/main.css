@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  width: 80%;
+  width: 100%;
   max-width: 900px;
   margin: 0 auto;
   background-color: #E7E5D8;
