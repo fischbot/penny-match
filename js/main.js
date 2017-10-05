@@ -184,6 +184,7 @@ $(function() {
   function shuffleImgs() {
     var imgs = Array.from(randomImgs);
     shuffledImages = imgs.shuffle();
+    randomImgs = null;
   }
 
   // insert imgs from randomImgs into img tags
