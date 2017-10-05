@@ -70,6 +70,10 @@ $(function() {
         if (matched === difficulty) {
           // game over - you win
         }
+          win = true;
+          gameOver();
+      }
+    }
 
     flippedCount = 0;
     flippedImages = [];
@@ -98,6 +102,9 @@ $(function() {
     // if grid exists, clear stage children before setting new grid
     if (randomImgs !== []) {
       $stage.empty();
+  function gameOver() {
+    if (win === true) {
+      $('.message').text('You Win!');
     }
     setupGrid(4, 6);
     randomImagesToArray(difficulty);
@@ -105,6 +112,9 @@ $(function() {
     shuffleImgs();
     setImgTagSrcs();
   });
+    $('.difficulty-btn').attr('disabled', 'true');
+    $('#play-again').show();
+  }
 
   $('#hard-btn').on('click', function() {
     // match 24 images
