@@ -203,3 +203,8 @@ footer a {
 footer a:hover {
   color: #E64100;
 }
+
+.disabledbutton {
+ pointer-events: none;
+ }
+
