@@ -80,54 +80,53 @@ $(function() {
   }
 
   // set difficulty
-  $('#easy-btn').on('click', function() {
-    // match 6 images
-    difficulty = 6;
-
+  $('.difficulty-btn').on('click', function(evt) {
+    var btnID = evt.target.id;
     // if grid exists, clear stage children before setting new grid
     if (randomImgs !== []) {
       $stage.empty();
     }
-    setupGrid(4, 3);
+
+    switch (btnID) {
+      case 'easy':
+        console.log('easy');
+        setting.easy();
+        break;
+      case 'medium':
+        console.log('medium');
+        setting.medium();
+        break;
+      case 'hard':
+        console.log('hard');
+        setting.hard();
+        break;
+      case 'debug':
+        console.log('debug');
+        setting.debug();
+        break;
+      default :
+        console.log('Something went wrong');
+    }
+
+    // TODO refactor
+    $('.difficulty-btn').removeClass('active');
+    $(`#${btnID}`).addClass('active');
+    setupGrid(cols, rows);
     randomImagesToArray(difficulty);
-    // console.log(`randomImgs assigned: ${randomImgs.sort()}`);
     setupImagesTagsinStage();
     shuffleImgs();
     setImgTagValues();
   });
 
-  $('#medium-btn').on('click', function() {
-    // match 12 images
-    difficulty = 12;
-    // if grid exists, clear stage children before setting new grid
-    if (randomImgs !== []) {
-      $stage.empty();
   function gameOver() {
     if (win === true) {
       $('.message').text('You Win!');
     }
-    setupGrid(4, 6);
-    randomImagesToArray(difficulty);
-    setupImagesTagsinStage();
-    shuffleImgs();
-    setImgTagSrcs();
-  });
     $('.difficulty-btn').attr('disabled', 'true');
     $('#play-again').show();
   }
 
-  $('#hard-btn').on('click', function() {
-    // match 24 images
-    difficulty = 18;
-    // if grid exists, clear stage children before setting new grid
-    if (randomImgs !== []) {
-      $stage.empty();
     }
-    setupGrid(6, 6);
-    randomImagesToArray(difficulty);
-    setupImagesTagsinStage();
-    shuffleImgs();
-    setImgTagSrcs();
   });
 
   function shuffleImgs() {
