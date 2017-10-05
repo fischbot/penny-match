@@ -111,6 +111,7 @@ main .container {
   background-color: #E7E4D8;
   padding: 100px 0;
   position: relative;
+  text-align: center;
 }
 
 #stage {
