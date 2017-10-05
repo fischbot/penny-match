@@ -24,6 +24,14 @@ body {
   background-color: #E7E5D8;
 }
 
+.disabledbutton {
+ pointer-events: none;
+ }
+
+ ul li {
+   list-style-type: none;
+ }
+ 
 /* =============== HEADER ================== */
 header .container {
   display: flex;
@@ -51,10 +59,6 @@ header h1 {
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
-}
-
-ul li {
-  list-style-type: none;
 }
 
 #center {
@@ -204,7 +208,4 @@ footer a:hover {
   color: #E64100;
 }
 
-.disabledbutton {
- pointer-events: none;
- }
 
