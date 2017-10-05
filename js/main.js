@@ -15,7 +15,9 @@ $(function() {
 
 // note to self: this delegates so images created later with jquery can be clicked
   $stage.on('click', '.image', function(event) {
+    // TODO refactor
     event.preventDefault();
+    var id = this.id;
 
     // proceed only if clicked image isn't already matched
     if (!$(`#${id}`).hasClass('matched')) {
@@ -42,16 +44,20 @@ $(function() {
     // TODO refactor
     var src1 = flippedImages[0].src;
     var src2 = flippedImages[1].src;
-    var id1 = flippedImages[0].id.toString();
+    var id1 = flippedImages[0].id;
     var id2 = flippedImages[1].id;
 
     // if images are not a match
     if (flippedImages[0].src !== flippedImages[1].src) {
-
+      // disable clicking more images until compared ones flip over
+      $('.image').addClass('disabledbutton');
       // give the user a brief chance to see the images before flipping them
       // back over
       setTimeout(function(){
         // TODO animate this action
+        // re-enable image clicking
+        $('.image').removeClass('disabledbutton');
+
         $(`#${id1}`).removeClass('visible');
         $(`#${id2}`).removeClass('visible');
       }, 1000);
