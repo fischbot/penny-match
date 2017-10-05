@@ -199,10 +199,11 @@ $(function() {
     }
   }
 
+  // set stage grid rows + cols based on difficulty setting
   function setupGrid(cols, rows) {
     $stage.css({
-      'grid-template-columns' : 'repeat(' + cols + ', 1fr)',
-      'grid-template-rows' : 'repeat(' + rows + ', 1fr)'
+      'grid-template-columns' : 'repeat(' + cols + ', 70px)',
+      'grid-template-rows' : 'repeat(' + rows + ', 70px)'
     });
   }
 
