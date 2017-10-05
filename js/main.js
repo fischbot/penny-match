@@ -188,7 +188,17 @@ $(function() {
     return imagePool[Math.floor(Math.random() * (totalImages - 1) + 1)];
   }
 
-  // TODO randomly assign images to grid
+  // Fisher-Yates shuffle
+  Array.prototype.shuffle = function() {
+    var i = this.length, j, temp;
+    while (--i > 0) {
+      j = Math.floor(Math.random() * (i + 1));
+      temp = this[j];
+      this[j] = this[i];
+      this[i] = temp;
+    }
+    return this;
+  }
 
 getImages();
 });
