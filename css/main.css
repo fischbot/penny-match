@@ -46,7 +46,7 @@ header h1 {
 }
 
 /* =============== Logo ================== */
-#logo-img-right img {
+#logo-img-left img {
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
