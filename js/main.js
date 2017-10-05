@@ -1,6 +1,8 @@
 'use strict';
 $(function() {
   var difficulty = 0;
+  var cols = 0;
+  var rows = 0;
   var imagePool = [];
   var randomImgs = [];
   var stagedImgs = [];
@@ -10,6 +12,8 @@ $(function() {
   var flippedImages = [];
   var $stage = $('#stage');
   var matched = 0;
+  var matched = 0
+  var win = false;
 
 // note to self: this delegates so images created later with jquery can be clicked
   $stage.on('click', '.image', function(event) {
