@@ -17,20 +17,25 @@ $(function() {
   $stage.on('click', '.image', function(event) {
     event.preventDefault();
 
-    if (flippedCount < 2) {
-      $(this).addClass('visible');
-      var id = this.id;
-      var src = $(this).attr('src');
-      flippedImages.push({id : id, src : src});
-      flippedCount++;
-    }
+    // proceed only if clicked image isn't already matched
+    if (!$(`#${id}`).hasClass('matched')) {
+      if (flippedCount < 2) {
+        $(this).addClass('visible');
 
+        var src = $(this).attr('src');
+
+        // check if user is clicking the same image
+        if (flippedImages.length !== 0 && flippedImages[0].id === id) {
+          return;
+        } else {
+          flippedImages.push({id : id, src : src});
+          flippedCount++;
+        }
+      }
+    }
     if (flippedCount === 2) {
       checkForMatch();
     }
-    // after 2 images are flipped check to see if they match
-    // if yes, leave them flipped
-    // if no, flip them back
   });
 
   function checkForMatch() {
