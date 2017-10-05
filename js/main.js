@@ -147,6 +147,17 @@ $(function() {
     }
   });
 
+  function resetAll() {
+    difficulty = 0;
+    randomImgs = [];
+    shuffledImages = [];
+    flippedCount = 0;
+    flippedImages = [];
+    matched = 0;
+    win = false;
+    $stage.empty();
+  }
+
   function shuffleImgs() {
     var imgs = Array.from(randomImgs);
     shuffledImages = imgs.shuffle();
