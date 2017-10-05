@@ -54,7 +54,6 @@ $(function() {
       // give the user a brief chance to see the images before flipping them
       // back over
       setTimeout(function(){
-        // TODO animate this action
         // re-enable image clicking
         $('.image').removeClass('disabledbutton');
 
