@@ -69,7 +69,6 @@ $(function() {
         matched++;
         if (matched === difficulty) {
           // game over - you win
-        }
           win = true;
           gameOver();
       }
@@ -190,7 +189,6 @@ $(function() {
   // insert imgs from randomImgs into img tags
   function setImgTagValues() {
     for (var i = 0; i < shuffledImages.length; i++) {
-      // $('.image').eq(i).attr('src', shuffledImages[i]);
       $('.image').eq(i).attr({'src': shuffledImages[i], 'id' : i});
     }
   }
@@ -200,19 +198,7 @@ $(function() {
       $('.image').eq(i).attr('id', i);
     }
   }
-// Fisher-Yates shuffle
-  Array.prototype.shuffle = function() {
-    var i = this.length, j, temp;
-    while (--i > 0) {
-      j = Math.floor(Math.random() * (i + 1));
-      temp = this[j];
-      this[j] = this[i];
-      this[i] = temp;
-    }
-    return this;
-  }
 
-// set stage grid rows + cols based on difficulty setting
   function setupGrid(cols, rows) {
     $stage.css({
       'grid-template-columns' : 'repeat(' + cols + ', 1fr)',
@@ -231,8 +217,8 @@ $(function() {
     }
   }
 
-// pick amount of random images equal to difficulty from image pool
-// and store them in an array
+  // pick amount of random images equal to difficulty from image pool
+  // and store them in an array
   function randomImagesToArray(difficulty) {
     var imgs = [];
     for (var i = 0; i < difficulty; i++) {
@@ -241,22 +227,20 @@ $(function() {
       while (imgs.indexOf(img) !== -1) {
         img = randomImgFromPool();
       }
-
       imgs.push(img);
     }
-
     doubleImagesInArray(imgs);
   }
 
-// double the images so there's something to match to and store
-// in randomImgs array
+  // double the images so there's something to match to and store
+  // in randomImgs array
   function doubleImagesInArray(imgs) {
     randomImgs = imgs.concat(imgs);
   }
 
   function setupImagesTagsinStage() {
     for (var i = 0; i < difficulty*2; i++) {
-        $stage.append('<div class="img-container"><img class="image"></img></div>');
+      $stage.append('<div class="img-container"><img class="image"></img></div>');
     }
   }
 
