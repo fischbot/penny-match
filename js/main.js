@@ -5,14 +5,12 @@ $(function() {
   var rows = 0;
   var imagePool = [];
   var randomImgs = [];
-  var stagedImgs = [];
   var shuffledImages = [];
   var totalImages = 27;
   var flippedCount = 0;
   var flippedImages = [];
   var $stage = $('#stage');
   var matched = 0;
-  var matched = 0
   var win = false;
 
 // note to self: this delegates so images created later with jquery can be clicked
