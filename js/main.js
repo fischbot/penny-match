@@ -207,7 +207,6 @@ $(function() {
   });
 
   function resetAll() {
-    difficulty = 0;
     randomImgs = [];
     shuffledImages = [];
     flippedCount = 0;
