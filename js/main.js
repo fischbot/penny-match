@@ -161,6 +161,11 @@ $(function() {
     // TODO refactor
     $('.difficulty-btn').removeClass('active');
     $(`#${btnID}`).addClass('active');
+
+    setupStageAndValues();
+  });
+
+  function setupStageAndValues() {
     setupGrid(cols, rows);
     randomImagesToArray(difficulty);
     setupImagesTagsinStage();
