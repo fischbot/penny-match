@@ -115,14 +115,16 @@ $(function() {
       }, 500);
 
     } else {  // if images are a match
-        // make them unclickable
-        $(`#${id1}`).addClass('matched');
-        $(`#${id2}`).addClass('matched');
-        matched++;
-        if (matched === difficulty) {
-          // game over - you win
-          win = true;
-          gameOver();
+              // make them unclickable
+      $(`#${id1}`).addClass('matched');
+      $(`#${id2}`).addClass('matched');
+      matched++;
+      if (matched === difficulty) {
+        // you win
+        timer.stop();
+        timer.compare();
+        win = true;
+        gameOver();
       }
     }
 
@@ -130,7 +132,7 @@ $(function() {
     flippedImages = [];
   }
 
-  // set difficulty
+// DIFFICULTY BUTTON
   $('.difficulty-btn').on('click', function(evt) {
     var btnID = evt.target.id;
     // if grid exists, clear stage children before setting new grid
@@ -140,19 +142,15 @@ $(function() {
 
     switch (btnID) {
       case 'easy':
-        console.log('easy');
         setting.easy();
         break;
       case 'medium':
-        console.log('medium');
         setting.medium();
         break;
       case 'hard':
-        console.log('hard');
         setting.hard();
         break;
       case 'debug':
-        console.log('debug');
         setting.debug();
         break;
       default :
