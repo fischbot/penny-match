@@ -187,9 +187,6 @@ $(function() {
   $('.play-again-btn').on('click', function(evt) {
     var btnID = evt.target.id;
 
-    // TODO refactor removing class
-    $('.difficulty-btn').removeClass('active');
-
     switch (btnID) {
       case 'yes':
         $('.difficulty-btn').removeAttr('disabled');
