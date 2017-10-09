@@ -171,7 +171,7 @@ $(function() {
   function setupStageAndValues() {
     setupGrid(cols, rows);
     randomImagesToArray(difficulty);
-    setupImagesTagsinStage();
+    setupImageTagsinStage();
     shuffleImgs();
     setImgTagValues();
   }
@@ -301,7 +301,7 @@ $(function() {
     randomImgs = imgs.concat(imgs);
   }
 
-  function setupImagesTagsinStage() {
+  function setupImageTagsinStage() {
     for (var i = 0; i < difficulty*2; i++) {
       $stage.append('<div class="img-container"><img class="image"></img></div>');
     }
