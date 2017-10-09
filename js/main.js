@@ -53,6 +53,7 @@ $(function() {
     bestTime : '00:00:00',
     currentTime : '',
     $current : $('#current'),
+    $best : $('#best'), // TODO not working
     start : function() {
         timer.time++;
         var mins = Math.floor(timer.time/10/60);
