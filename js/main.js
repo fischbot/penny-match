@@ -141,7 +141,7 @@ $(function() {
 
     // if grid exists, clear stage children before setting new grid
     if (randomImgs !== []) {
-      $stage.empty();
+      resetAll();
     }
 
     switch (btnID) {
