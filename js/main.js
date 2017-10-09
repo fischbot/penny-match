@@ -5,7 +5,7 @@ $(function() {
   var $difficultyBtn = $('.difficulty-btn');
 
   var images = {
-    total : 27,
+    total : 60,
     pool : [],
     random : [],
     shuffled : [],
@@ -32,7 +32,7 @@ $(function() {
       var imgsrc = '';
 
       for (var i = 1; i <= images.total; i++ ) {
-        imgsrc = imageFolder + i + '.png';
+        imgsrc = imageFolder + i + '.jpg';
         images.pool.push(imgsrc);
       }
     },
