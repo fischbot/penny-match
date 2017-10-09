@@ -192,6 +192,7 @@ $(function() {
         $('.difficulty-btn').removeAttr('disabled');
         $('#play-again').hide();
         resetAll();
+        setupStageAndValues();
         timer.resetCurrent();
         break;
       case 'no':
