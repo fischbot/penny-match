@@ -1,51 +1,174 @@
 'use strict';
 $(function() {
-  var difficulty = 0;
-  var cols = 0;
-  var rows = 0;
-  var imagePool = [];
-  var randomImgs = [];
-  var shuffledImages = [];
-  var totalImages = 27;
-  var flippedCount = 0;
-  var flippedImages = [];
-  var matched = 0;
-  var win = false;
-  var firstClick = true;
   var $stage = $('#stage');
   var $rules = $('#rules');
   var $difficultyBtn = $('.difficulty-btn');
 
-// note to self: this delegates so images created later with jquery can be clicked
-  $stage.on('click', '.image', function(event) {
-    // TODO refactor
-    event.preventDefault();
-    var id = this.id;
-    if (firstClick) {
-      // start timer
-      timer.t = setInterval(timer.start, 100);
-      firstClick = false;
-    }
-    // proceed only if clicked image isn't already matched
-    if (!$(`#${id}`).hasClass('matched')) {
-      if (flippedCount < 2) {
-        $(this).addClass('visible');
-
-        var src = $(this).attr('src');
-
-        // check if user is clicking the same image
-        if (flippedImages.length !== 0 && flippedImages[0].id === id) {
-          return;
-        } else {
-          flippedImages.push({id : id, src : src});
-          flippedCount++;
-        }
+  var images = {
+    total : 27,
+    pool : [],
+    random : [],
+    shuffled : [],
+    flipped : [],
+    flippedCount : 0,
+    matched : 0,
+    shuffleImgs : function() {
+      var imgs = Array.from(images.random);
+      images.shuffled = imgs.shuffle();
+      images.random = null;
+    },
+    setTagValues : function() {
+      for (var i = 0; i < images.shuffled.length; i++) {
+        $('.image').eq(i).attr({'src': images.shuffled[i], 'id' : i});
       }
+    },
+    setId : function() {
+      for (var i = 0; i < images.shuffled.length; i++) {
+        $('.image').eq(i).attr('id', i);
+      }
+    },
+    getImages() {
+      var imageFolder = '../img/';
+      var imgsrc = '';
+
+      for (var i = 1; i <= images.total; i++ ) {
+        imgsrc = imageFolder + i + '.png';
+        images.pool.push(imgsrc);
+      }
+    },
+    randomImagesToArray : function(difficulty) {
+      var imgs = [];
+      for (var i = 0; i < difficulty; i++) {
+        var img = images.randomImgFromPool();
+        // check to make sure randomImgs doesn't already contain the image
+        while (imgs.indexOf(img) !== -1) {
+          img = images.randomImgFromPool();
+        }
+        imgs.push(img);
+      }
+      images.doubleImagesInArray(imgs);
+    },
+    doubleImagesInArray : function(imgs) {
+      images.random = imgs.concat(imgs);
+    },
+    randomImgFromPool : function() {
+      // get a random image from the image pool
+      return images.pool[Math.floor(Math.random() * (images.total - 1) + 1)];
     }
-    if (flippedCount === 2) {
-      checkForMatch();
+  };
+
+  var game = {
+    difficulty : 0,
+    cols : 0,
+    rows : 0,
+    win : false,
+    firstClick : true,
+    setupGrid : function(cols, rows) {
+     if ( $(window).width() < 500) {
+       if (difficulty === 20) {
+         cols -= 2;
+         rows += 2;
+       } else {
+         cols--;
+         rows++;
+       }
+     }
+     $stage.css({
+       'grid-template-columns' : 'repeat(' + cols + ', minmax(40px, 70px))',
+       'grid-template-rows' : 'repeat(' + rows + ', minmax(40px, 70px))'
+     });
+   },
+   setupImageTagsinStage : function() {
+     for (var i = 0; i < game.difficulty*2; i++) {
+       $stage.append('<div class="img-container"><img class="image"></img></div>');
+     }
+   },
+   setupStageAndValues : function() {
+     game.setupGrid(game.cols, game.rows);
+     images.randomImagesToArray(game.difficulty);
+     game.setupImageTagsinStage();
+     images.shuffleImgs();
+     images.setTagValues();
+   },
+   checkForMatch : function() {
+     // TODO refactor
+     var src1 = images.flipped[0].src;
+     var src2 = images.flipped[1].src;
+     var id1 = images.flipped[0].id;
+     var id2 = images.flipped[1].id;
+
+     // if images are not a match
+     if (images.flipped[0].src !== images.flipped[1].src) {
+       // disable clicking more images until compared ones flip over
+       $('.image').addClass('disabledbutton');
+       // give the user a brief chance to see the images before flipping them
+       // back over
+       setTimeout(function(){
+         // re-enable image clicking
+         $('.image').removeClass('disabledbutton');
+         $(`#${id1}`).removeClass('visible');
+         $(`#${id2}`).removeClass('visible');
+       }, 500);
+
+     } else {  // if images are a match
+               // make them unclickable
+       $(`#${id1}`).addClass('matched');
+       $(`#${id2}`).addClass('matched');
+       images.matched++;
+       if (images.matched === game.difficulty) {
+         // you win
+         timer.stop();
+         timer.compare();
+         game.win = true;
+         game.gameOver();
+       }
+     }
+
+     images.flippedCount = 0;
+     images.flipped = [];
+   },
+   gameOver : function() {
+     if (game.win === true) {
+       $('.message').text('You Win!');
+     }
+     $('.difficulty-btn').attr('disabled', 'true');
+     $('#play-again').show();
+   },
+   resetAll : function() {
+     images.random = [];
+     images.shuffled = [];
+     images.flippedCount = 0;
+     images.flipped = [];
+     images.matched = 0;
+     game.win = false;
+     game.firstClick = true;
+     $stage.empty();
+   }
+  };
+
+  var setting = {
+    easy : function() {
+      game.difficulty = 6;
+      game.cols = 4;
+      game.rows = 3;
+    },
+    medium : function() {
+        game.difficulty = 12;
+        game.cols = 4;
+        game.rows = 6;
+    },
+    hard : function() {
+        game.difficulty = 20;
+        // TODO set cols and rows based on a changing amount of images
+        game.cols = 5;
+        game.rows = 8;
+    },
+    debug : function() {
+        game.difficulty = 1;
+        game.cols = 2;
+        game.rows = 1;
     }
-  });
+  };
 
   var timer = {
     t : null, // stores timer so it can be stopped
@@ -95,44 +218,35 @@ $(function() {
     }
   };
 
-  function checkForMatch() {
-    // TODO refactor
-    var src1 = flippedImages[0].src;
-    var src2 = flippedImages[1].src;
-    var id1 = flippedImages[0].id;
-    var id2 = flippedImages[1].id;
+// note to self: this delegates so images created later with jquery can be clicked
+  $stage.on('click', '.image', function(event) {
+    event.preventDefault();
+    var id = this.id;
+    if (game.firstClick) {
+      // start timer
+      timer.t = setInterval(timer.start, 100);
+      game.firstClick = false;
+    }
+    // proceed only if clicked image isn't already matched
+    if (!$(`#${id}`).hasClass('matched')) {
+      if (images.flippedCount < 2) {
+        $(this).addClass('visible');
 
-    // if images are not a match
-    if (flippedImages[0].src !== flippedImages[1].src) {
-      // disable clicking more images until compared ones flip over
-      $('.image').addClass('disabledbutton');
-      // give the user a brief chance to see the images before flipping them
-      // back over
-      setTimeout(function(){
-        // re-enable image clicking
-        $('.image').removeClass('disabledbutton');
+        var src = $(this).attr('src');
 
-        $(`#${id1}`).removeClass('visible');
-        $(`#${id2}`).removeClass('visible');
-      }, 500);
-
-    } else {  // if images are a match
-              // make them unclickable
-      $(`#${id1}`).addClass('matched');
-      $(`#${id2}`).addClass('matched');
-      matched++;
-      if (matched === difficulty) {
-        // you win
-        timer.stop();
-        timer.compare();
-        win = true;
-        gameOver();
+        // check if user is clicking the same image
+        if (images.flipped.length !== 0 && images.flipped[0].id === id) {
+          return;
+        } else {
+          images.flipped.push({id : id, src : src});
+          images.flippedCount++;
+        }
       }
     }
-
-    flippedCount = 0;
-    flippedImages = [];
-  }
+    if (images.flippedCount === 2) {
+      game.checkForMatch();
+    }
+  });
 
 // DIFFICULTY BUTTON
   $('.difficulty-btn').on('click', function(evt) {
@@ -141,8 +255,8 @@ $(function() {
     var btnID = evt.target.id;
 
     // if grid exists, clear stage children before setting new grid
-    if (randomImgs !== []) {
-      resetAll();
+    if (images.random !== []) {
+      game.resetAll();
     }
 
     switch (btnID) {
@@ -166,34 +280,17 @@ $(function() {
     $('.difficulty-btn').removeClass('active');
     $(`#${btnID}`).addClass('active');
 
-    setupStageAndValues();
+    game.setupStageAndValues();
   });
-
-  function setupStageAndValues() {
-    setupGrid(cols, rows);
-    randomImagesToArray(difficulty);
-    setupImageTagsinStage();
-    shuffleImgs();
-    setImgTagValues();
-  }
-
-  function gameOver() {
-    if (win === true) {
-      $('.message').text('You Win!');
-    }
-    $('.difficulty-btn').attr('disabled', 'true');
-    $('#play-again').show();
-  }
 
   $('.play-again-btn').on('click', function(evt) {
     var btnID = evt.target.id;
-
     switch (btnID) {
       case 'yes':
         $('.difficulty-btn').removeAttr('disabled');
         $('#play-again').hide();
-        resetAll();
-        setupStageAndValues();
+        game.resetAll();
+        game.setupStageAndValues();
         timer.resetCurrent();
         break;
       case 'no':
@@ -204,121 +301,6 @@ $(function() {
         break;
     }
   });
-
-  function resetAll() {
-    randomImgs = [];
-    shuffledImages = [];
-    flippedCount = 0;
-    flippedImages = [];
-    matched = 0;
-    win = false;
-    firstClick = true;
-    $stage.empty();
-  }
-
-  var setting = {
-    easy : function() {
-      difficulty = 6;
-      cols = 4;
-      rows = 3;
-    },
-    medium : function() {
-        difficulty = 12;
-        cols = 4;
-        rows = 6;
-    },
-    hard : function() {
-        difficulty = 20;
-        // TODO set cols and rows based on a changing amount of images
-        cols = 5;
-        rows = 8;
-    },
-    debug : function() {
-        difficulty = 1;
-        cols = 2;
-        rows = 1;
-    }
-  };
-
-// ============================= SET UP IMAGES =============================
-  function shuffleImgs() {
-    var imgs = Array.from(randomImgs);
-    shuffledImages = imgs.shuffle();
-    randomImgs = null;
-  }
-
-  // insert imgs from randomImgs into img tags
-  function setImgTagValues() {
-    for (var i = 0; i < shuffledImages.length; i++) {
-      $('.image').eq(i).attr({'src': shuffledImages[i], 'id' : i});
-    }
-  }
-
-  function setImgId() {
-    for (var i = 0; i < shuffledImages.length; i++) {
-      $('.image').eq(i).attr('id', i);
-    }
-  }
-
-  // set stage grid rows + cols based on difficulty setting
-  function setupGrid(cols, rows) {
-    if ( $(window).width() < 500) {
-      if (difficulty === 20) {
-        cols -= 2;
-        rows += 2;
-      } else {
-        cols--;
-        rows++;
-      }
-    }
-    $stage.css({
-      'grid-template-columns' : 'repeat(' + cols + ', minmax(40px, 70px))',
-      'grid-template-rows' : 'repeat(' + rows + ', minmax(40px, 70px))'
-    });
-  }
-
-  // get images from folder
-  function getImages() {
-    var imageFolder = '../img/';
-    var imgsrc = '';
-
-    for (var i = 1; i <= totalImages; i++ ) {
-      imgsrc = imageFolder + i + '.png';
-      imagePool.push(imgsrc);
-    }
-  }
-
-  // pick amount of random images equal to difficulty from image pool
-  // and store them in an array
-  function randomImagesToArray(difficulty) {
-    var imgs = [];
-    for (var i = 0; i < difficulty; i++) {
-      var img = randomImgFromPool();
-      // check to make sure randomImgs doesn't already contain the image
-      while (imgs.indexOf(img) !== -1) {
-        img = randomImgFromPool();
-      }
-      imgs.push(img);
-    }
-    doubleImagesInArray(imgs);
-  }
-
-  // double the images so there's something to match to and store
-  // in randomImgs array
-  function doubleImagesInArray(imgs) {
-    randomImgs = imgs.concat(imgs);
-  }
-
-  function setupImageTagsinStage() {
-    for (var i = 0; i < difficulty*2; i++) {
-      $stage.append('<div class="img-container"><img class="image"></img></div>');
-    }
-  }
-
-  function randomImgFromPool() {
-    // get a random image from the image pool
-    return imagePool[Math.floor(Math.random() * (totalImages - 1) + 1)];
-  }
 
   // Fisher-Yates shuffle
   Array.prototype.shuffle = function() {
@@ -332,5 +314,5 @@ $(function() {
     return this;
   }
 
-getImages();
+  images.getImages();
 });
