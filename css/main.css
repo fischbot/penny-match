@@ -11,16 +11,13 @@ body {
 }
 
 #page {
-  display: flex;
-  flex-direction: column;
-  /* TODO flex grow/shrink */
-  position: relative;
 }
 
 .container {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  padding: 0 20px;
   background-color: #E7E5D8;
 }
 
@@ -31,29 +28,37 @@ body {
  ul li {
    list-style-type: none;
  }
- 
+
 /* =============== HEADER ================== */
 header .container {
   display: flex;
   justify-content: center;
   padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 header h1 {
   align-self: center;
-  font-size: 4.375em;
-}
-
-header h1 {
   padding: 0;
-  font-size: 2.4em;
+  font-size: 1.4em;
   margin: 0;
   font-family: 'Walter Turncoat', cursive;
   color: #CA9429;
   font-variant: small-caps;
+  text-align: center;
 }
 
 /* =============== Logo ================== */
+.logo-img {
+  text-align: center;
+  align-self: center;
+}
+
+.logo-img img {
+  width: 90%;
+  height: auto;
+}
+
 #logo-img-left img {
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
@@ -61,8 +66,13 @@ header h1 {
   transform: scaleX(-1);
 }
 
+#logo-img-right {
+  display: none;
+}
+
 #center {
   align-self: center;
+  width: 100%;
 }
 
 /* =============== DIFFICULTY SETTINGS ================== */
@@ -70,7 +80,8 @@ header h1 {
   text-align: center;
   display: flex;
   justify-content: center;
-  padding: 3px 0;
+  flex-direction: column;
+  padding: 10px 0;
   margin: 0;
   background-color: #C5E3C3;
 }
@@ -113,27 +124,68 @@ header h1 {
 /* =============== MAIN AREA ================== */
 main .container {
   background-color: #E7E4D8;
-  padding: 100px 0;
-  position: relative;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+#timer {
+  font-family: 'Walter Turncoat', cursive;
+  padding: 7px 15px;
+  margin-bottom: 40px;
+  font-size: 1.4em;
+  letter-spacing: 4px;
+  color: #fff;
+  text-align: right;
+  background: #D5D5CB;
+  display: inline-block;
+}
+
+#timer hr {
+  border: 2px solid #DA7D3A;
+}
+
+/* current time */
+#timer p:nth-child(1) {
+  color: #D09E2E;
+}
+
+/* best time */
+#timer p:nth-child(3) {
+  color: #E94D59;
+  font-weight: bold;
+}
+
+#rules {
+  text-align: left;
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.8em;
+  color: #D88054;
+}
+
+#rules ul {
+  padding: 20% 0 60%;
+}
+
 
 #stage {
   display: grid;
-  grid-gap : 40px;
-  justify-content: center;
+  grid-gap : 20px;
+  padding-bottom: 60px;
 }
 
 .img-container {
-  width: 100px;
-  height: 100px;
   background: #A55620;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3 )
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3 );
 }
 
 .image {
-  max-width: 100px;
-  max-height: 100px;
+  width: 100%;
+  /*min-width: 50px;*/
+  height: 100%;
+  /*min-height: 50px;*/
+
   border: 2px solid #D57132;
   opacity: 0;
   cursor: pointer;
@@ -146,17 +198,16 @@ main .container {
 /* =============== GAME OVER ================== */
 #play-again {
   font-family: 'Amatic SC', cursive;
-  width: 60%;
+  /*width: 60%;*/
   height: 300px;
   border-radius: 20px;
   margin: 0 auto;
+  padding: 0 10px;
   background: #fff;
   text-align: center;
   display: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   position: absolute;
-  left: 170px;
-  top: 20%;
 }
 
 #play-again button {
@@ -208,4 +259,52 @@ footer a:hover {
   color: #E64100;
 }
 
+@media screen and (min-width: 375px) {
+  header h1 {
+    font-size: 2em;
+  }
 
+  #rules {
+    font-size: 2.4em;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  /*header h1 {
+    font-size: 2.8em;
+  }*/
+  #logo-img-right {
+    display: block;
+  }
+
+  #settings {
+    padding: 3px 0;
+  }
+
+  #play-again {
+    padding: 0 70px;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  header h1 {
+    font-size: 4.375em;
+  }
+
+  #settings {
+    margin: 0 auto;
+    flex-direction: row;
+    width: 80%;
+  }
+
+  #play-again {
+    padding: 0 100px;
+  }
+
+  @media screen and (min-width: 900px) {
+    #timer {
+      /*right: 60px;*/
+    }
+  }
+}
