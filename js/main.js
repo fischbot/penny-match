@@ -233,7 +233,7 @@ $(function() {
         rows = 8;
     },
     debug : function() {
-        difficulty = 2;
+        difficulty = 1;
         cols = 2;
         rows = 1;
     }
