@@ -260,9 +260,18 @@ $(function() {
 
   // set stage grid rows + cols based on difficulty setting
   function setupGrid(cols, rows) {
+    if ( $(window).width() < 500) {
+      if (difficulty === 20) {
+        cols -= 2;
+        rows += 2;
+      } else {
+        cols--;
+        rows++;
+      }
+    }
     $stage.css({
-      'grid-template-columns' : 'repeat(' + cols + ', 70px)',
-      'grid-template-rows' : 'repeat(' + rows + ', 70px)'
+      'grid-template-columns' : 'repeat(' + cols + ', minmax(40px, 70px))',
+      'grid-template-rows' : 'repeat(' + rows + ', minmax(40px, 70px))'
     });
   }
 
