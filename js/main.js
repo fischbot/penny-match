@@ -9,17 +9,18 @@ $(function() {
   var totalImages = 27;
   var flippedCount = 0;
   var flippedImages = [];
-  var $stage = $('#stage');
   var matched = 0;
   var win = false;
   var firstClick = true;
+  var $stage = $('#stage');
+  var $rules = $('#rules');
+  var $difficultyBtn = $('.difficulty-btn');
 
 // note to self: this delegates so images created later with jquery can be clicked
   $stage.on('click', '.image', function(event) {
     // TODO refactor
     event.preventDefault();
     var id = this.id;
-
     if (firstClick) {
       // start timer
       timer.t = setInterval(timer.start, 100);
