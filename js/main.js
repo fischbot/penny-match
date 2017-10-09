@@ -174,7 +174,7 @@ $(function() {
     setupImagesTagsinStage();
     shuffleImgs();
     setImgTagValues();
-  });
+  }
 
   function gameOver() {
     if (win === true) {
