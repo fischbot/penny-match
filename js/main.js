@@ -19,6 +19,11 @@ $(function() {
     event.preventDefault();
     var id = this.id;
 
+    if (firstClick) {
+      // start timer
+      timer.t = setInterval(timer.start, 100);
+      firstClick = false;
+    }
     // proceed only if clicked image isn't already matched
     if (!$(`#${id}`).hasClass('matched')) {
       if (flippedCount < 2) {
@@ -39,6 +44,53 @@ $(function() {
       checkForMatch();
     }
   });
+
+  var timer = {
+    t : null, // stores timer so it can be stopped
+    time : 0,
+    bestTime : '00:00:00',
+    currentTime : '',
+    $current : $('#current'),
+    start : function() {
+        timer.time++;
+        var mins = Math.floor(timer.time/10/60);
+        var secs = Math.floor(timer.time/10);
+        var tenths = timer.time % 10;
+
+        if (mins < 10) {
+          mins = '0' + mins;
+        }
+        if (secs < 10) {
+          secs = '0' + secs;
+        }
+        timer.$current.text(`${mins}:${secs}:0${tenths}`);
+    },
+    stop : function() {
+      clearInterval(timer.t);
+      timer.currentTime = timer.$current.text();
+    },
+    compare : function() {
+      if (timer.bestTime === '00:00:00') {
+        timer.bestTime = timer.currentTime;
+        timer.storeBest();
+      } else if (timer.currentTime < timer.bestTime) {
+        timer.storeBest();
+      }
+    },
+    storeBest : function() {
+      timer.bestTime = timer.currentTime;
+      $('#best').text(timer.bestTime);
+    },
+    resetCurrent : function() {
+      timer.time = 0;
+      timer.currentTime = '';
+      timer.$current.text('00:00:00');
+    },
+    resetBest : function() {
+      timer.bestTime = '';
+      $('#best').text('00:00:00');
+    }
+  };
 
   function checkForMatch() {
     // TODO refactor
@@ -135,6 +187,7 @@ $(function() {
         $('.difficulty-btn').removeAttr('disabled');
         $('#play-again').hide();
         resetAll();
+        timer.resetCurrent();
         break;
       case 'no':
         $('#play-again').hide();
@@ -153,6 +206,7 @@ $(function() {
     flippedImages = [];
     matched = 0;
     win = false;
+    firstClick = true;
     $stage.empty();
   }
 
