@@ -135,7 +135,10 @@ $(function() {
 
 // DIFFICULTY BUTTON
   $('.difficulty-btn').on('click', function(evt) {
+    $rules.hide();
+
     var btnID = evt.target.id;
+
     // if grid exists, clear stage children before setting new grid
     if (randomImgs !== []) {
       $stage.empty();
