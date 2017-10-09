@@ -239,6 +239,7 @@ $(function() {
     }
   };
 
+// ============================= SET UP IMAGES =============================
   function shuffleImgs() {
     var imgs = Array.from(randomImgs);
     shuffledImages = imgs.shuffle();
