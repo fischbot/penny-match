@@ -12,6 +12,7 @@ $(function() {
   var $stage = $('#stage');
   var matched = 0;
   var win = false;
+  var firstClick = true;
 
 // note to self: this delegates so images created later with jquery can be clicked
   $stage.on('click', '.image', function(event) {
