@@ -176,8 +176,39 @@ $(function() {
     if (images.flippedCount === 2) {
      game.checkForMatch();
     }
-   }
-  };
+  },
+  setDifficulty : function(event) { // TODO break up this function
+    $rules.hide(); // TODO move this to another function or rename this one?
+    let btnID = event.target.id;
+
+    // if grid exists, clear stage children before setting new grid
+    if (images.random !== []) {
+      this.resetAll();
+    }
+
+    switch (btnID) {
+      case 'easy':
+        setting.easy();
+        break;
+      case 'medium':
+        setting.medium();
+        break;
+      case 'hard':
+        setting.hard();
+        break;
+      case 'debug':
+        setting.debug();
+        break;
+      default :
+        console.log('Something went wrong');
+    }
+
+    // TODO refactor
+    $('.difficulty-btn').removeClass('active');
+    $(`#${btnID}`).addClass('active');
+
+    game.setupStageAndValues(); // TODO move out of this function
+  },
   playAgain : function(event) {
     let btnID = event.target.id;
     switch (btnID) {
@@ -303,41 +334,6 @@ $(function() {
     if (images.flippedCount === 2) {
       game.checkForMatch();
     }
-  });
-
-// DIFFICULTY BUTTON
-  $('.difficulty-btn').on('click', function(evt) {
-    $rules.hide();
-
-    let btnID = evt.target.id;
-
-    // if grid exists, clear stage children before setting new grid
-    if (images.random !== []) {
-      game.resetAll();
-    }
-
-    switch (btnID) {
-      case 'easy':
-        setting.easy();
-        break;
-      case 'medium':
-        setting.medium();
-        break;
-      case 'hard':
-        setting.hard();
-        break;
-      case 'debug':
-        setting.debug();
-        break;
-      default :
-        console.log('Something went wrong');
-    }
-
-    // TODO refactor
-    $('.difficulty-btn').removeClass('active');
-    $(`#${btnID}`).addClass('active');
-
-    game.setupStageAndValues();
   });
 
   // Fisher-Yates shuffle
