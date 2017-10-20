@@ -13,27 +13,22 @@ $(function() {
     flippedCount : 0,
     matched : 0,
     shuffleImgs : function() {
-      images.shuffled = imgs.shuffle();
-      images.random = null;
       let imgs = Array.from(this.random);
+      this.shuffled = imgs.shuffle();
+      this.random = null;
     },
     setTagValues : function() {
-      for (var i = 0; i < images.shuffled.length; i++) {
-        $('.image').eq(i).attr({'src': images.shuffled[i], 'id' : i});
-      }
-    },
-    setId : function() {
-      for (var i = 0; i < images.shuffled.length; i++) {
-        $('.image').eq(i).attr('id', i);
-      }
+      this.shuffled.forEach(function(image, i) {
+        $('.image').eq(i).attr({'src': image, 'id' : i});
+      });
     },
     getImages() {
       let imageFolder = '../img/';
       let imgsrc = '';
 
-      for (var i = 1; i <= images.total; i++ ) {
+      for (let i = 1; i <= this.total; i++ ) {
         imgsrc = imageFolder + i + '.jpg';
-        images.pool.push(imgsrc);
+        this.pool.push(imgsrc);
       }
     },
     randomImagesToArray : function() {
@@ -42,18 +37,18 @@ $(function() {
         let img = this.randomImgFromPool();
         // check to make sure randomImgs doesn't already contain the image
         while (imgs.indexOf(img) !== -1) {
-          img = images.randomImgFromPool();
+          img = this.randomImgFromPool();
         }
         imgs.push(img);
       }
-      images.doubleImagesInArray(imgs);
+      this.doubleImagesInArray(imgs);
     },
     doubleImagesInArray : function(imgs) {
-      images.random = imgs.concat(imgs);
+      this.random = imgs.concat(imgs);
     },
     randomImgFromPool : function() {
       // get a random image from the image pool
-      return images.pool[Math.floor(Math.random() * (images.total - 1) + 1)];
+      return this.pool[Math.floor(Math.random() * (this.total - 1) + 1)];
     }
   };
 
@@ -79,14 +74,14 @@ $(function() {
      });
    },
    setupImageTagsinStage : function() {
-     for (var i = 0; i < game.difficulty*2; i++) {
+     for (let i = 0; i < this.difficulty*2; i++) {
        $stage.append('<div class="img-container"><img class="image"></img></div>');
      }
    },
    setupStageAndValues : function() {
-     game.setupGrid(game.cols, game.rows);
-     images.randomImagesToArray(game.difficulty);
-     game.setupImageTagsinStage();
+     this.setupGrid(this.cols, this.rows);
+     images.randomImagesToArray(this.difficulty);
+     this.setupImageTagsinStage();
      images.shuffleImgs();
      images.setTagValues();
    },
@@ -115,12 +110,12 @@ $(function() {
        $(`#${id1}`).addClass('matched');
        $(`#${id2}`).addClass('matched');
        images.matched++;
-       if (images.matched === game.difficulty) {
+       if (images.matched === this.difficulty) {
          // you win
          timer.stop();
          timer.compare();
-         game.win = true;
-         game.gameOver();
+         this.win = true;
+         this.gameOver();
        }
      }
 
@@ -140,8 +135,8 @@ $(function() {
      images.flippedCount = 0;
      images.flipped = [];
      images.matched = 0;
-     game.win = false;
-     game.firstClick = true;
+     this.win = false;
+     this.firstClick = true;
      $stage.empty();
    }
   };
