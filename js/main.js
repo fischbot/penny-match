@@ -149,9 +149,10 @@ $(function() {
      this.bindEvents();
      images.getImages();
    },
-   test : function(event) {
+   start : function(event) {
+    //  debugger;
     event.preventDefault();
-    let id = this.id;
+    let id = event.target.id;
     if (game.firstClick) {
      // start timer
      timer.t = setInterval(timer.start, 100);
@@ -160,9 +161,9 @@ $(function() {
     // proceed only if clicked image isn't already matched
     if (!$(`#${id}`).hasClass('matched')) {
      if (images.flippedCount < 2) {
-       $(this).addClass('visible');
+       $(`#${id}`).addClass('visible');
 
-       let src = $(this).attr('src');
+       let src = $(`#${id}`).attr('src');
 
        // check if user is clicking the same image
        if (images.flipped.length !== 0 && images.flipped[0].id === id) {
@@ -305,36 +306,6 @@ $(function() {
       $('#best').text('00:00:00');
     }
   };
-
-// note to self: this delegates so images created later with jquery can be clicked
-  $stage.on('click', '.image', function(event) {
-    event.preventDefault();
-    let id = this.id;
-    if (game.firstClick) {
-      // start timer
-      timer.t = setInterval(timer.start, 100);
-      game.firstClick = false;
-    }
-    // proceed only if clicked image isn't already matched
-    if (!$(`#${id}`).hasClass('matched')) {
-      if (images.flippedCount < 2) {
-        $(this).addClass('visible');
-
-        let src = $(this).attr('src');
-
-        // check if user is clicking the same image
-        if (images.flipped.length !== 0 && images.flipped[0].id === id) {
-          return;
-        } else {
-          images.flipped.push({id : id, src : src});
-          images.flippedCount++;
-        }
-      }
-    }
-    if (images.flippedCount === 2) {
-      game.checkForMatch();
-    }
-  });
 
   // Fisher-Yates shuffle
   Array.prototype.shuffle = function() {
