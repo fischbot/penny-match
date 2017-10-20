@@ -178,6 +178,25 @@ $(function() {
     }
    }
   };
+  playAgain : function(event) {
+    let btnID = event.target.id;
+    switch (btnID) {
+      case 'yes':
+        $('.difficulty-btn').removeAttr('disabled');
+        $('#play-again').hide();
+        this.resetAll();
+        this.setupStageAndValues();
+        timer.resetCurrent();
+        break;
+      case 'no':
+        $('#play-again').hide();
+        $stage.remove();
+        $('main .container').append('<p class="message" style="padding-top:0">Thanks for playing!</h2>');
+        $('.message').text('Thanks For Playing!');
+        break;
+    }
+  }
+};
 
   let setting = {
     easy : function() {
@@ -319,25 +338,6 @@ $(function() {
     $(`#${btnID}`).addClass('active');
 
     game.setupStageAndValues();
-  });
-
-  $('.play-again-btn').on('click', function(evt) {
-    let btnID = evt.target.id;
-    switch (btnID) {
-      case 'yes':
-        $('.difficulty-btn').removeAttr('disabled');
-        $('#play-again').hide();
-        game.resetAll();
-        game.setupStageAndValues();
-        timer.resetCurrent();
-        break;
-      case 'no':
-        $('#play-again').hide();
-        $stage.remove();
-        $('main .container').append('<p class="message" style="padding-top:0">Thanks for playing!</h2>');
-        $('.message').text('Thanks For Playing!');
-        break;
-    }
   });
 
   // Fisher-Yates shuffle
