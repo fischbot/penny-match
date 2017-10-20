@@ -60,7 +60,7 @@ $(function() {
     firstClick : true,
     setupGrid : function(cols, rows) {
      if ( $(window).width() < 500) {
-       if (difficulty === 20) {
+       if (this.difficulty === 20) {
          cols -= 2;
          rows += 2;
        } else {
@@ -123,7 +123,7 @@ $(function() {
      images.flipped = [];
    },
    gameOver : function() {
-     if (game.win === true) {
+     if (this.win === true) {
        $('.message').text('You Win!');
      }
      $('.difficulty-btn').attr('disabled', 'true');
