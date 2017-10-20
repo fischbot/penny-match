@@ -143,6 +143,43 @@ $(function() {
      game.win = false;
      game.firstClick = true;
      $stage.empty();
+   },
+   bindEvents : function() {
+     $stage.on('click', '.image', this.test.bind(this));
+
+   },
+   init : function() {
+     // TODO
+     this.bindEvents();
+     images.getImages();
+   },
+   test : function(event) {
+    event.preventDefault();
+    let id = this.id;
+    if (game.firstClick) {
+     // start timer
+     timer.t = setInterval(timer.start, 100);
+     game.firstClick = false;
+    }
+    // proceed only if clicked image isn't already matched
+    if (!$(`#${id}`).hasClass('matched')) {
+     if (images.flippedCount < 2) {
+       $(this).addClass('visible');
+
+       let src = $(this).attr('src');
+
+       // check if user is clicking the same image
+       if (images.flipped.length !== 0 && images.flipped[0].id === id) {
+         return;
+       } else {
+         images.flipped.push({id : id, src : src});
+         images.flippedCount++;
+       }
+     }
+    }
+    if (images.flippedCount === 2) {
+     game.checkForMatch();
+    }
    }
   };
 
@@ -314,5 +351,6 @@ $(function() {
     return this;
   }
 
-  images.getImages();
+  game.init();
+  // images.getImages();
 });
