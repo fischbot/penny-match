@@ -140,8 +140,9 @@ $(function() {
      $stage.empty();
    },
    bindEvents : function() {
-     $stage.on('click', '.image', this.test.bind(this));
-
+     $stage.on('click', '.image', this.start.bind(this));
+     $('.difficulty-btn').on('click', this.setDifficulty.bind(this));
+     $('.play-again-btn').on('click', this.playAgain.bind(this));
    },
    init : function() {
      // TODO
