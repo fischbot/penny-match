@@ -1,10 +1,10 @@
 'use strict';
 $(function() {
-  var $stage = $('#stage');
-  var $rules = $('#rules');
-  var $difficultyBtn = $('.difficulty-btn');
+  let $stage = $('#stage');
+  let $rules = $('#rules');
+  let $difficultyBtn = $('.difficulty-btn');
 
-  var images = {
+  let images = {
     total : 60,
     pool : [],
     random : [],
@@ -13,9 +13,9 @@ $(function() {
     flippedCount : 0,
     matched : 0,
     shuffleImgs : function() {
-      var imgs = Array.from(images.random);
       images.shuffled = imgs.shuffle();
       images.random = null;
+      let imgs = Array.from(this.random);
     },
     setTagValues : function() {
       for (var i = 0; i < images.shuffled.length; i++) {
@@ -28,18 +28,18 @@ $(function() {
       }
     },
     getImages() {
-      var imageFolder = '../img/';
-      var imgsrc = '';
+      let imageFolder = '../img/';
+      let imgsrc = '';
 
       for (var i = 1; i <= images.total; i++ ) {
         imgsrc = imageFolder + i + '.jpg';
         images.pool.push(imgsrc);
       }
     },
-    randomImagesToArray : function(difficulty) {
-      var imgs = [];
-      for (var i = 0; i < difficulty; i++) {
-        var img = images.randomImgFromPool();
+    randomImagesToArray : function() {
+      let imgs = [];
+      for (let i = 0; i < game.difficulty; i++) {
+        let img = this.randomImgFromPool();
         // check to make sure randomImgs doesn't already contain the image
         while (imgs.indexOf(img) !== -1) {
           img = images.randomImgFromPool();
@@ -57,7 +57,7 @@ $(function() {
     }
   };
 
-  var game = {
+  let game = {
     difficulty : 0,
     cols : 0,
     rows : 0,
@@ -92,10 +92,10 @@ $(function() {
    },
    checkForMatch : function() {
      // TODO refactor
-     var src1 = images.flipped[0].src;
-     var src2 = images.flipped[1].src;
-     var id1 = images.flipped[0].id;
-     var id2 = images.flipped[1].id;
+     let src1 = images.flipped[0].src;
+     let src2 = images.flipped[1].src;
+     let id1 = images.flipped[0].id;
+     let id2 = images.flipped[1].id;
 
      // if images are not a match
      if (images.flipped[0].src !== images.flipped[1].src) {
@@ -146,7 +146,7 @@ $(function() {
    }
   };
 
-  var setting = {
+  let setting = {
     easy : function() {
       game.difficulty = 6;
       game.cols = 4;
@@ -170,7 +170,7 @@ $(function() {
     }
   };
 
-  var timer = {
+  let timer = {
     t : null, // stores timer so it can be stopped
     time : 0,
     bestTime : '00:00:00',
@@ -179,9 +179,9 @@ $(function() {
     $best : $('#best'), // TODO not working
     start : function() {
         timer.time++;
-        var mins = Math.floor(timer.time/10/60);
-        var secs = Math.floor(timer.time/10);
-        var tenths = timer.time % 10;
+        let mins = Math.floor(timer.time/10/60);
+        let secs = Math.floor(timer.time/10);
+        let tenths = timer.time % 10;
 
         if (mins < 10) {
           mins = '0' + mins;
@@ -221,7 +221,7 @@ $(function() {
 // note to self: this delegates so images created later with jquery can be clicked
   $stage.on('click', '.image', function(event) {
     event.preventDefault();
-    var id = this.id;
+    let id = this.id;
     if (game.firstClick) {
       // start timer
       timer.t = setInterval(timer.start, 100);
@@ -232,7 +232,7 @@ $(function() {
       if (images.flippedCount < 2) {
         $(this).addClass('visible');
 
-        var src = $(this).attr('src');
+        let src = $(this).attr('src');
 
         // check if user is clicking the same image
         if (images.flipped.length !== 0 && images.flipped[0].id === id) {
@@ -252,7 +252,7 @@ $(function() {
   $('.difficulty-btn').on('click', function(evt) {
     $rules.hide();
 
-    var btnID = evt.target.id;
+    let btnID = evt.target.id;
 
     // if grid exists, clear stage children before setting new grid
     if (images.random !== []) {
@@ -284,7 +284,7 @@ $(function() {
   });
 
   $('.play-again-btn').on('click', function(evt) {
-    var btnID = evt.target.id;
+    let btnID = evt.target.id;
     switch (btnID) {
       case 'yes':
         $('.difficulty-btn').removeAttr('disabled');
@@ -304,7 +304,7 @@ $(function() {
 
   // Fisher-Yates shuffle
   Array.prototype.shuffle = function() {
-    var i = this.length, j, temp;
+    let i = this.length, j, temp;
     while (--i > 0) {
       j = Math.floor(Math.random() * (i + 1));
       temp = this[j];
