@@ -184,6 +184,11 @@ $(function() {
         if (secs < 10) {
           secs = '0' + secs;
         }
+
+        if (secs === 60) {
+          secs = '00';
+        }
+
         timer.$current.text(`${mins}:${secs}:0${tenths}`);
     },
     stop : function() {
