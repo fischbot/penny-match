@@ -85,8 +85,7 @@ $(function() {
      images.shuffleImgs();
      images.setTagValues();
    },
-   checkForMatch : function() {
-     // TODO refactor
+   checkForMatch : function() { // TODO refactor
      let src1 = images.flipped[0].src;
      let src2 = images.flipped[1].src;
      let id1 = images.flipped[0].id;
