@@ -57,6 +57,7 @@ let game = {
   gameOver : function() {
     if (this.win === true) {
       $('.message').text('You Win!');
+      $('#stop-reset-btn').attr('disabled', 'true');
     }
     $('#play-again').show();
   },
@@ -70,9 +71,11 @@ let game = {
         this.setupStageAndValues();
         timer.resetCurrent();
         $('#stop-reset-btn').text("Reset");
+        $('#stop-reset-btn').removeAttr('disabled');
         break;
       case 'no':
         $('#play-again').hide();
+        $('#stop-reset-btn').hide();
         $stage.remove();
         $('main .container').append('<p class="message" id="thanks" style="padding-top:0">Thanks for  playing!</h2>');
         break;
