@@ -1,10 +1,9 @@
 let game = {
   difficulty : 0,
   cols : 0,
-  rows : 0,
   win : false,
   firstClick : true,
-  setupGrid : function(cols, rows) {
+  setupGrid : function(cols) {
    $stage.css({
      'grid-template-columns' : 'repeat(' + cols + ', minmax(50px, 100px))',
    });
@@ -15,7 +14,7 @@ let game = {
    }
  },
  setupStageAndValues : function() {
-   this.setupGrid(this.cols, this.rows);
+   this.setupGrid(this.cols);
    images.randomImagesToArray(this.difficulty);
    this.setupImageTagsinStage();
    images.shuffleImgs();
