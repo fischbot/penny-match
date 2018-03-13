@@ -76,7 +76,7 @@ let game = {
       case 'no':
         $('#play-again').hide();
         $stage.remove();
-        $('main .container').append('<p class="message" style="padding-top:0">Thanks for  playing!</h2>');
+        $('main .container').append('<p class="message" id="thanks" style="padding-top:0">Thanks for  playing!</h2>');
         break;
     }
     e.preventDefault();
