@@ -5,7 +5,7 @@ let game = {
   firstClick : true,
   setupGrid : function(cols) {
    $stage.css({
-     'grid-template-columns' : 'repeat(' + cols + ', minmax(50px, 100px))',
+     'grid-template-columns' : 'repeat(' + cols + ', minmax(45px, 100px))',
    });
  },
  setupImageTagsinStage : function() {
