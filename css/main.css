@@ -289,20 +289,13 @@ footer a:hover {
   color: #E64100;
 }
 
-@media screen and (min-width: 375px) {
-  header h1 {
-    font-size: 2em;
-  }
+/* =============== MEDIA QUERIES ================== */
+@media screen and (min-width: 480px) {
 
-  #rules {
-    font-size: 2.4em;
-  }
 }
 
-@media screen and (min-width: 600px) {
-  /*header h1 {
-    font-size: 2.8em;
-  }*/
+/* Tablet */
+@media screen and (min-width: 768px) {
   #logo-img-right {
     display: block;
   }
@@ -311,13 +304,6 @@ footer a:hover {
     padding: 3px 0;
   }
 
-  #play-again {
-    padding: 0 70px;
-  }
-}
-
-/* Tablet */
-@media screen and (min-width: 768px) {
   header h1 {
     font-size: 4.375em;
   }
@@ -331,10 +317,9 @@ footer a:hover {
   #play-again {
     padding: 0 100px;
   }
+}
 
-  @media screen and (min-width: 900px) {
-    #timer {
-      /*right: 60px;*/
-    }
-  }
+/* Desktop */
+@media screen and (min-width: 940px) {
+
 }
