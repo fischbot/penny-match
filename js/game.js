@@ -6,7 +6,7 @@ let game = {
 // ============================================================================
   bindEvents : function() {
     $stage.on('click', '.image', this.update.bind(this));
-    $('.difficulty-btn').on('click', this.setDifficulty.bind(this));
+    $('.difficulty-btn').on('click', this.start.bind(this));
     $('.play-again-btn').on('click', this.playAgain.bind(this));
   },
 // ============================================================================
@@ -96,15 +96,7 @@ let game = {
     $(`#${btnID}`).addClass('active');
   },
 // ============================================================================
-  setDifficulty : function(event) { // TODO break up this function
-    $rules.hide(); // TODO move this to another function or rename this one?
-
-    let btnID = event.target.id;
-    // if grid exists, clear stage children before setting new grid
-    if (images.random !== []) {
-      this.resetAll();
-    }
-
+  setDifficulty : function(btnID) {
     switch (btnID) {
       case 'easy':
         setting.easy();
@@ -121,10 +113,20 @@ let game = {
       default :
         console.log('Something went wrong');
     }
+  },
+// ============================================================================
+  start : function(event) {
+    $rules.hide(); // TODO move this to another function or rename this one?
 
+    let btnID = event.target.id;
+    // if grid exists, clear stage children before setting new grid
+    if (images.random !== []) {
+      this.resetAll();
+    }
+
+    this.setDifficulty(btnID);
     this.setActiveBtnColor(btnID);
-
-    game.setupStageAndValues(); // TODO move out of this function
+    this.setupStageAndValues();
   },
 // ============================================================================
   setupGrid : function(cols) {
