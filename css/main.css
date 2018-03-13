@@ -182,27 +182,6 @@ main .container {
   padding-bottom: 60px;
 }
 
-.show {
-  grid-template-columns: repeat(5, minmax(40px, 70px));
-  grid-template-rows: repeat(8, minmax(40px, 70px));
-}
-
-.hard {
-  /* grid-template-columns: repeat(5, minmax(40px, 70px));
-  grid-template-rows: repeat(8, minmax(40px, 70px)); */
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.medium,
-.easy {
-  /* grid-template-columns: repeat(4, minmax(40px, 70px));
-  grid-template-rows: repeat(6, minmax(40px, 70px)); */
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.easy {
-  grid-template-columns: repeat(4, minmax(40px, 70px));
-  grid-template-rows: repeat(3, minmax(40px, 70px));
 }
 
 .img-container {
