@@ -20,35 +20,40 @@ body {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 10px;
   background-color: #E7E5D8;
 }
 
 .disabledbutton {
- pointer-events: none;
- }
+  pointer-events: none;
+}
 
- ul li {
-   list-style-type: none;
- }
+ul li {
+  list-style-type: none;
+}
+
+.hidden {
+  display: none;
+}
 
 /* =============== HEADER ================== */
 header .container {
-  display: flex;
-  justify-content: center;
-  padding-top: 60px;
-  /* padding-bottom: 60px; */
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  grid-row-gap: 10px;
+  padding-top: 20px;
 }
 
 header h1 {
   align-self: center;
   padding: 0;
-  font-size: 1.4em;
+  font-size: 2.3em;
   margin: 0;
   font-family: 'Walter Turncoat', cursive;
   color: #CA9429;
   font-variant: small-caps;
   text-align: center;
+  line-height: 1em;
 }
 
 /* =============== Logo ================== */
@@ -58,7 +63,7 @@ header h1 {
 }
 
 .logo-img img {
-  width: 90%;
+  width: 100%;
   height: auto;
 }
 
@@ -73,21 +78,11 @@ header h1 {
   display: none;
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  width: 100%;
-}
-
-/* =============== DIFFICULTY SETTINGS ================== */
+/* =============== Settings ================================================= */
 #settings {
-  text-align: center;
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  padding: 10px 0;
+  padding: 5px 0;
   margin: 0;
   background-color: #C5E3C3;
 }
@@ -127,7 +122,51 @@ header h1 {
   color: #E64100;
   font-weight: bold;
 }
-/* =============== MAIN AREA ================== */
+
+#settings,
+#timer {
+  grid-column: 1/ -1;
+}
+
+/* ====================== Timer ============================================= */
+
+#timer {
+  font-family: 'Walter Turncoat', cursive;
+  padding: 7px 15px;
+  font-size: 1.4em;
+  line-height: 1.1;
+  letter-spacing: 3px;
+  color: #fff;
+  background: #D5D5CB;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+#timer hr {
+  border: 2px solid #DA7D3A;
+}
+
+/* current time */
+#timer p:nth-child(2) {
+  color: #D09E2E;
+  grid-row: 1 / 2;
+}
+
+/* best time */
+#timer p:nth-child(3) {
+  color: #E94D59;
+  font-weight: bold;
+  grid-row: 2 / 3;
+}
+
+#timer p:nth-child(2),
+#timer p:nth-child(3) {
+  grid-column: 2 / 3;
+  justify-self: start;
+}
+
+/* ====================== MAIN AREA ========================================= */
 main {
   flex: 2;
 }
@@ -137,34 +176,7 @@ main .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-
-#timer {
-  font-family: 'Walter Turncoat', cursive;
-  padding: 7px 15px;
-  font-size: 1.4em;
-  letter-spacing: 4px;
-  color: #fff;
-  background: #D5D5CB;
-  text-align: right;
-  align-self: center;
-  margin-top: 5px;
-}
-
-#timer hr {
-  border: 2px solid #DA7D3A;
-}
-
-/* current time */
-#timer p:nth-child(1) {
-  color: #D09E2E;
-}
-
-/* best time */
-#timer p:nth-child(3) {
-  color: #E94D59;
-  font-weight: bold;
+  justify-content: space-evenly;
 }
 
 #rules {
@@ -172,37 +184,13 @@ main .container {
   font-family: 'Amatic SC', cursive;
   font-size: 1.8em;
   color: #D88054;
+  margin-top: 30px;
 }
 
 
 #stage {
-  margin-top: 30px;
   display: grid;
-  grid-gap : 20px;
-  padding-bottom: 60px;
-}
-
-.show {
-  grid-template-columns: repeat(5, minmax(40px, 70px));
-  grid-template-rows: repeat(8, minmax(40px, 70px));
-}
-
-.hard {
-  /* grid-template-columns: repeat(5, minmax(40px, 70px));
-  grid-template-rows: repeat(8, minmax(40px, 70px)); */
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.medium,
-.easy {
-  /* grid-template-columns: repeat(4, minmax(40px, 70px));
-  grid-template-rows: repeat(6, minmax(40px, 70px)); */
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.easy {
-  grid-template-columns: repeat(4, minmax(40px, 70px));
-  grid-template-rows: repeat(3, minmax(40px, 70px));
+  grid-gap : 10px;
 }
 
 .img-container {
@@ -212,12 +200,13 @@ main .container {
 
 .image {
   width: 100%;
-  /*min-width: 50px;*/
   height: 100%;
-  /*min-height: 50px;*/
-
   border: 2px solid #D57132;
   opacity: 0;
+}
+
+.image,
+button {
   cursor: pointer;
 }
 
@@ -241,20 +230,34 @@ main .container {
 }
 
 #play-again button {
-  font-family: 'Amatic SC', cursive;
   margin: 0 20px;
-  border-radius: 10px;
-  padding: 10px 15px;;
   font-size: 1.3em;
-  background-color: #CB9328;
+  padding: 10px 15px;
+}
+
+#play-again button,
+#stop-reset-btn {
+  font-family: 'Amatic SC', cursive;
+  border-radius: 10px;
   border: none;
+  background-color: #CB9328;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 1px;
   cursor: pointer;
 }
 
-#play-again button:hover {
+#stop-reset-btn {
+  padding: 7px 10px;
+  justify-self: center;
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  font-size: 1em;
+}
+
+#play-again button:hover,
+#stop-reset-btn:hover {
   background-color: #F26421;
 }
 
@@ -268,6 +271,9 @@ main .container {
   text-transform: uppercase;
 }
 
+#thanks {
+  text-align: center;
+}
 /* =============== FOOTER ================== */
 footer .container {
   text-align: center;
@@ -278,6 +284,7 @@ footer .container {
 footer p {
   color: #441E00;
   padding: 5px 0;
+  font-size: 0.875em;
 }
 
 footer a {
@@ -290,13 +297,33 @@ footer a:hover {
 }
 
 /* =============== MEDIA QUERIES ================== */
-@media screen and (min-width: 480px) {
+/* @media screen and (max-width: 359px) {
+  header h1 {
+    font-size: 1.7em;
+  }
+} */
 
-}
+@media screen and (min-width: 450px) {
+  header .container {
+    grid-template-columns: 100px 1fr 100px;
+  }
 
-/* Tablet */
-@media screen and (min-width: 768px) {
+  header h1 {
+    font-size: 2.6em;
+  }
+
+  .logo-img {
+    justify-self: center;
+  }
+
+  #logo-img-left {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
   #logo-img-right {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
     display: block;
   }
 
@@ -304,14 +331,15 @@ footer a:hover {
     padding: 3px 0;
   }
 
-  header h1 {
-    font-size: 4.375em;
+  #settings,
+  #timer {
+    width: 80%;
+    margin: 0 auto;
   }
 
-  #settings {
-    margin: 0 auto;
-    flex-direction: row;
-    width: 80%;
+  #stop-reset-btn {
+    justify-self: end;
+    margin-right: 20px;
   }
 
   #play-again {
@@ -319,7 +347,39 @@ footer a:hover {
   }
 }
 
-/* Desktop */
-@media screen and (min-width: 940px) {
+@media screen and (min-width: 700px) {
+  header .container {
+    grid-template-columns: auto 1fr auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
+  header h1 {
+    font-size: 4em;
+  }
+
+  #timer {
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 1fr;
+  }
+
+  #timer p:nth-child(2),
+  #timer p:nth-child(3) {
+    align-self: center;
+  }
+
+  #timer p:nth-child(2) {
+    justify-self: center;
+  }
+
+  #timer p:nth-child(3) {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+    justify-self: start;
+  }
+
+  #stop-reset-btn {
+    grid-row : 1 / 2;
+    margin: 5px;
+  }
 }
