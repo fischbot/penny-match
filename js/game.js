@@ -13,7 +13,7 @@ let game = {
   init : function() {
     this.bindEvents();
     images.getImages();
-    $timer.hide();
+    $('#timer').hide();
   },
 // ============================================================================
   checkForMatch : function() { // TODO refactor
@@ -80,36 +80,6 @@ let game = {
     }
   },
 // ============================================================================
-  update : function(event) {
-   //  debugger;
-   event.preventDefault();
-   let id = event.target.id;
-   if (game.firstClick) {
-    // start timer
-    timer.t = setInterval(timer.start, 100);
-    game.firstClick = false;
-   }
-   // proceed only if clicked image isn't already matched
-   if (!$(`#${id}`).hasClass('matched')) {
-    if (images.flippedCount < 2) {
-      $(`#${id}`).addClass('visible');
-
-      let src = $(`#${id}`).attr('src');
-
-      // check if user is clicking the same image
-      if (images.flipped.length !== 0 && images.flipped[0].id === id) {
-        return;
-      } else {
-        images.flipped.push({id : id, src : src});
-        images.flippedCount++;
-      }
-     }
-    }
-    if (images.flippedCount === 2) {
-     game.checkForMatch();
-    }
-  },
-// ============================================================================
   resetAll : function() {
     images.random = [];
     images.shuffled = [];
@@ -173,6 +143,36 @@ let game = {
     this.setupImageTagsinStage();
     images.shuffleImgs();
     images.setTagValues();
-    $timer.show();
-  }
+    $('#timer').show();
+  },
+// ============================================================================
+  update : function(event) {
+   //  debugger;
+   event.preventDefault();
+   let id = event.target.id;
+   if (game.firstClick) {
+    // start timer
+    timer.t = setInterval(timer.start, 100);
+    game.firstClick = false;
+   }
+   // proceed only if clicked image isn't already matched
+   if (!$(`#${id}`).hasClass('matched')) {
+    if (images.flippedCount < 2) {
+      $(`#${id}`).addClass('visible');
+
+      let src = $(`#${id}`).attr('src');
+
+      // check if user is clicking the same image
+      if (images.flipped.length !== 0 && images.flipped[0].id === id) {
+        return;
+      } else {
+        images.flipped.push({id : id, src : src});
+        images.flippedCount++;
+      }
+     }
+    }
+    if (images.flippedCount === 2) {
+     game.checkForMatch();
+    }
+  },
 };
