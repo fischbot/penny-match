@@ -120,22 +120,6 @@ let game = {
     }
   },
 // ============================================================================
-  start : function(event) {
-    $rules.hide(); // TODO move this to another function or rename this one?
-
-    let btnID = event.target.id;
-    // if grid exists, clear stage children before setting new grid
-    if (images.random !== []) {
-      this.reset();
-    }
-
-    this.setDifficulty(btnID);
-    this.setActiveBtnColor(btnID);
-    this.setupStageAndValues();
-    $('#stop-reset-btn').show();
-    $('.difficulty-btn').attr('disabled', 'true');
-  },
-// ============================================================================
   setupGrid : function(cols) {
     $stage.css({
       'grid-template-columns' : 'repeat(' + cols + ', minmax(45px, 100px))',
@@ -158,6 +142,21 @@ let game = {
     $('#timer').show();
   },
 // ============================================================================
+  start : function(event) {
+    $rules.hide(); // TODO move this to another function or rename this one?
+
+    let btnID = event.target.id;
+    // if grid exists, clear stage children before setting new grid
+    if (images.random !== []) {
+      this.reset();
+    }
+
+    this.setDifficulty(btnID);
+    this.setActiveBtnColor(btnID);
+    this.setupStageAndValues();
+    $('#stop-reset-btn').show();
+    $('.difficulty-btn').attr('disabled', 'true');
+  },
 // ============================================================================
   stopReset : function() {
     timer.stop();
