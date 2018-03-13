@@ -5,6 +5,7 @@ let game = {
   firstClick : true,
 // ============================================================================
   bindEvents : function() {
+    $('button').off();
     $stage.on('click', '.image', this.update.bind(this));
     $('.difficulty-btn').on('click', this.start.bind(this));
     $('.play-again-btn').on('click', this.playAgain.bind(this));
