@@ -72,6 +72,16 @@
             </div><!-- /.container -->
           </footer>
         </div>
-        <script src="js/main.js"></script>
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="js/vendor/LAB.min.js"></script>
+        <script>
+          $LAB.script("js/images.js").wait()
+          .script("js/timer.js").wait()
+          .script("js/setting.js").wait()
+          .script("js/game.js").wait()
+          .script("js/main.js").wait(function() {
+            game.init();
+          });
+        </script>
     </body>
 </html>
