@@ -91,6 +91,11 @@ let game = {
     $stage.empty();
   },
 // ============================================================================
+  setActiveBtnColor : function(btnID) {
+    $('.difficulty-btn').removeClass('active');
+    $(`#${btnID}`).addClass('active');
+  },
+// ============================================================================
   setDifficulty : function(event) { // TODO break up this function
     $rules.hide(); // TODO move this to another function or rename this one?
 
@@ -117,9 +122,7 @@ let game = {
         console.log('Something went wrong');
     }
 
-    // TODO refactor
-    $('.difficulty-btn').removeClass('active');
-    $(`#${btnID}`).addClass('active');
+    this.setActiveBtnColor(btnID);
 
     game.setupStageAndValues(); // TODO move out of this function
   },
