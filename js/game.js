@@ -66,7 +66,7 @@ let game = {
     switch (btnID) {
       case 'yes':
         $('#play-again').hide();
-        this.resetAll();
+        this.reset();
         this.setupStageAndValues();
         timer.resetCurrent();
         $('#stop-reset-btn').text("Reset");
@@ -80,7 +80,7 @@ let game = {
     e.preventDefault();
   },
 // ============================================================================
-  resetAll : function() {
+  reset : function() {
     images.random = [];
     images.shuffled = [];
     images.flippedCount = 0;
@@ -121,7 +121,7 @@ let game = {
     let btnID = event.target.id;
     // if grid exists, clear stage children before setting new grid
     if (images.random !== []) {
-      this.resetAll();
+      this.reset();
     }
 
     this.setDifficulty(btnID);
