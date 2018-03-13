@@ -21,12 +21,13 @@ $stopResetBtn.on('click', () => {
     timer.stop();
     $stopResetBtn.text('Reset');
   } else {
-    $stopResetBtn.text('Stop');
     game.resetAll();
     timer.resetCurrent();
     timer.resetBest();
+    $('.difficulty-btn').removeAttr('disabled');
   }
+
+  e.preventDefault();
 });
 
 game.init();
-// images.getImages();

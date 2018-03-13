@@ -57,9 +57,7 @@ let game = {
   gameOver : function() {
     if (this.win === true) {
       $('.message').text('You Win!');
-      $('#stop-reset-btn').hide();
     }
-    $('.difficulty-btn').attr('disabled', 'true');
     $('#play-again').show();
   },
 // ============================================================================
@@ -67,11 +65,11 @@ let game = {
     let btnID = event.target.id;
     switch (btnID) {
       case 'yes':
-        $('.difficulty-btn').removeAttr('disabled');
         $('#play-again').hide();
         this.resetAll();
         this.setupStageAndValues();
         timer.resetCurrent();
+        $('#stop-reset-btn').text("Reset");
         break;
       case 'no':
         $('#play-again').hide();
@@ -91,7 +89,6 @@ let game = {
     this.win = false;
     this.firstClick = true;
     $stage.empty();
-    $stopResetBtn.hide();
   },
 // ============================================================================
   setActiveBtnColor : function(btnID) {
@@ -130,6 +127,8 @@ let game = {
     this.setDifficulty(btnID);
     this.setActiveBtnColor(btnID);
     this.setupStageAndValues();
+    $('#stop-reset-btn').show();
+    $('.difficulty-btn').attr('disabled', 'true');
   },
 // ============================================================================
   setupGrid : function(cols) {
@@ -162,7 +161,11 @@ let game = {
     // start timer
     timer.t = setInterval(timer.start, 100);
     game.firstClick = false;
-    $('#stop-reset-btn').show();
+    if ($('#stop-reset-btn').text() === 'Stop') {
+      $('#stop-reset-btn').text('Reset');
+    } else {
+      $('#stop-reset-btn').text('Stop');
+    }
    }
    // proceed only if clicked image isn't already matched
    if (!$(`#${id}`).hasClass('matched')) {
