@@ -5,7 +5,7 @@ let game = {
   firstClick : true,
 // ============================================================================
   bindEvents : function() {
-    $stage.on('click', '.image', this.play.bind(this));
+    $stage.on('click', '.image', this.update.bind(this));
     $('.difficulty-btn').on('click', this.setDifficulty.bind(this));
     $('.play-again-btn').on('click', this.playAgain.bind(this));
   },
@@ -61,7 +61,26 @@ let game = {
     $('#play-again').show();
   },
 // ============================================================================
-  play : function(event) {
+  playAgain : function(event) {
+    let btnID = event.target.id;
+    switch (btnID) {
+      case 'yes':
+        $('.difficulty-btn').removeAttr('disabled');
+        $('#play-again').hide();
+        this.resetAll();
+        this.setupStageAndValues();
+        timer.resetCurrent();
+        break;
+      case 'no':
+        $('#play-again').hide();
+        $stage.remove();
+        $('main .container').append('<p class="message" style="padding-top:0">Thanks for  playing!</h2>');
+        $('.message').text('Thanks For Playing!');
+        break;
+    }
+  },
+// ============================================================================
+  update : function(event) {
    //  debugger;
    event.preventDefault();
    let id = event.target.id;
@@ -88,25 +107,6 @@ let game = {
     }
     if (images.flippedCount === 2) {
      game.checkForMatch();
-    }
-  },
-// ============================================================================
-  playAgain : function(event) {
-    let btnID = event.target.id;
-    switch (btnID) {
-      case 'yes':
-        $('.difficulty-btn').removeAttr('disabled');
-        $('#play-again').hide();
-        this.resetAll();
-        this.setupStageAndValues();
-        timer.resetCurrent();
-        break;
-      case 'no':
-        $('#play-again').hide();
-        $stage.remove();
-        $('main .container').append('<p class="message" style="padding-top:0">Thanks for  playing!</h2>');
-        $('.message').text('Thanks For Playing!');
-        break;
     }
   },
 // ============================================================================
