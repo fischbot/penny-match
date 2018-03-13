@@ -5,19 +5,9 @@ let game = {
   win : false,
   firstClick : true,
   setupGrid : function(cols, rows) {
-   if ( $(window).width() < 500) {
-     if (this.difficulty === 20) {
-       cols -= 2;
-       rows += 2;
-     } else {
-       cols--;
-       rows++;
-     }
-   }
-   // $stage.css({
-   //   'grid-template-columns' : 'repeat(' + cols + ', minmax(40px, 70px))',
-   //   'grid-template-rows' : 'repeat(' + rows + ', minmax(40px, 70px))'
-   // });
+   $stage.css({
+     'grid-template-columns' : 'repeat(' + cols + ', minmax(50px, 100px))',
+   });
  },
  setupImageTagsinStage : function() {
    for (let i = 0; i < this.difficulty*2; i++) {
