@@ -11,6 +11,9 @@ body {
 }
 
 #page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .container {
@@ -34,7 +37,7 @@ header .container {
   display: flex;
   justify-content: center;
   padding-top: 60px;
-  padding-bottom: 60px;
+  /* padding-bottom: 60px; */
 }
 
 header h1 {
@@ -71,7 +74,10 @@ header h1 {
 }
 
 #center {
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
   width: 100%;
 }
 
@@ -122,24 +128,28 @@ header h1 {
   font-weight: bold;
 }
 /* =============== MAIN AREA ================== */
+main {
+  flex: 2;
+}
+
 main .container {
-  background-color: #E7E4D8;
-  text-align: center;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 #timer {
   font-family: 'Walter Turncoat', cursive;
   padding: 7px 15px;
-  margin-bottom: 40px;
   font-size: 1.4em;
   letter-spacing: 4px;
   color: #fff;
-  text-align: right;
   background: #D5D5CB;
-  display: inline-block;
+  text-align: right;
+  align-self: center;
+  margin-top: 5px;
 }
 
 #timer hr {
@@ -164,12 +174,9 @@ main .container {
   color: #D88054;
 }
 
-#rules ul {
-  padding: 20% 0 60%;
-}
-
 
 #stage {
+  margin-top: 30px;
   display: grid;
   grid-gap : 20px;
   padding-bottom: 60px;
