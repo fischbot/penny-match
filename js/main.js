@@ -27,7 +27,6 @@ $stopResetBtn.on('click', () => {
     $('.difficulty-btn').removeAttr('disabled');
   }
 
-  // e.preventDefault();
 });
 
 game.init();

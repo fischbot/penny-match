@@ -77,7 +77,7 @@ let game = {
         $('main .container').append('<p class="message" id="thanks" style="padding-top:0">Thanks for  playing!</h2>');
         break;
     }
-    e.preventDefault();
+
   },
 // ============================================================================
   reset : function() {
@@ -154,8 +154,6 @@ let game = {
   },
 // ============================================================================
   update : function(event) {
-   //  debugger;
-   event.preventDefault();
    let id = event.target.id;
    if (game.firstClick) {
     // start timer
