@@ -78,6 +78,7 @@ let game = {
         $('.message').text('Thanks For Playing!');
         break;
     }
+    e.preventDefault();
   },
 // ============================================================================
   resetAll : function() {
