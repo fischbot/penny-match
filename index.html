@@ -27,13 +27,14 @@
                   <li><button class="difficulty-btn" id="easy">Easy</button></li>
                   <li><button class="difficulty-btn" id="medium">Medium</button></li>
                   <li><button class="difficulty-btn" id="hard">Hard</button></li>
-                  <!-- <li><button class="difficulty-btn" id="debug">debug</button></li> -->
+                  <li><button class="difficulty-btn" id="debug">debug</button></li>
                 </ul>
               </div><!-- /#settings -->
-              <div id="timer" class="hidden">
-                  <p>Current: <span id="current">00:00:00</span></p>
+              <div id="timer">
+                  <button id="stop-reset-btn">Stop</button>
+                  <p>Current: <br><span id="current">00:00:00</span></p>
                   <!-- <hr> -->
-                  <p>Best: <span id="best">00:00:00</span></p>
+                  <p>Best: <br><span id="best">00:00:00</span></p>
                 </div>
               <div class="logo-img" id="logo-img-right">
                   <img src="img/logo-face.png" alt="logo">
@@ -50,8 +51,6 @@
                   </ul>
                 </p>
               </div><!-- /#rules -->
-
-              <button id="stop-reset-btn">Stop</button>
               <div id="stage">
               </div>
               <div id="play-again">
