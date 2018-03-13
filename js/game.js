@@ -14,6 +14,7 @@ let game = {
     this.bindEvents();
     images.getImages();
     $('#timer').hide();
+    $('#stop-reset-btn').hide();
   },
 // ============================================================================
   checkForMatch : function() { // TODO refactor
@@ -56,6 +57,7 @@ let game = {
   gameOver : function() {
     if (this.win === true) {
       $('.message').text('You Win!');
+      $('#stop-reset-btn').hide();
     }
     $('.difficulty-btn').attr('disabled', 'true');
     $('#play-again').show();
@@ -89,6 +91,7 @@ let game = {
     this.win = false;
     this.firstClick = true;
     $stage.empty();
+    $stopResetBtn.hide();
   },
 // ============================================================================
   setActiveBtnColor : function(btnID) {
@@ -159,6 +162,7 @@ let game = {
     // start timer
     timer.t = setInterval(timer.start, 100);
     game.firstClick = false;
+    $('#stop-reset-btn').show();
    }
    // proceed only if clicked image isn't already matched
    if (!$(`#${id}`).hasClass('matched')) {
