@@ -9,6 +9,7 @@ let game = {
     $stage.on('click', '.image', this.update.bind(this));
     $('.difficulty-btn').on('click', this.start.bind(this));
     $('.play-again-btn').on('click', this.playAgain.bind(this));
+    $('#stop-reset-btn').on('click', this.stopReset.bind(this));
   },
 // ============================================================================
   init : function() {
@@ -155,6 +156,19 @@ let game = {
     images.shuffleImgs();
     images.setTagValues();
     $('#timer').show();
+  },
+// ============================================================================
+// ============================================================================
+  stopReset : function() {
+    timer.stop();
+    if ($stopResetBtn.text() === "Stop") {
+      $stopResetBtn.text('Reset');
+    } else {
+      timer.resetBest();
+      timer.resetCurrent();
+      game.reset();
+      $('.difficulty-btn').removeAttr('disabled');
+    }
   },
 // ============================================================================
   update : function(event) {

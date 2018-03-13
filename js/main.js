@@ -16,17 +16,4 @@ Array.prototype.shuffle = function() {
   return this;
 }
 
-$stopResetBtn.on('click', () => {
-  timer.stop();
-  if ($stopResetBtn.text() === "Stop") {
-    $stopResetBtn.text('Reset');
-  } else {
-    timer.resetBest();
-    timer.resetCurrent();
-    game.reset();
-    $('.difficulty-btn').removeAttr('disabled');
-  }
-
-});
-
 game.init();
