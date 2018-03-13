@@ -75,7 +75,6 @@ let game = {
         $('#play-again').hide();
         $stage.remove();
         $('main .container').append('<p class="message" style="padding-top:0">Thanks for  playing!</h2>');
-        $('.message').text('Thanks For Playing!');
         break;
     }
     e.preventDefault();
