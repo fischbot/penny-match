@@ -160,7 +160,7 @@ let game = {
    if (game.firstClick) {
     // start timer
     timer.t = setInterval(timer.start, 100);
-    game.firstClick = false;
+    this.firstClick = false;
     if ($('#stop-reset-btn').text() === 'Stop') {
       $('#stop-reset-btn').text('Reset');
     } else {

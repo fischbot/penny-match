@@ -4,7 +4,6 @@ let timer = {
   bestTime : '00:00:00',
   currentTime : '',
   $current : $('#current'),
-  $best : $('#best'), // TODO not working
   start : function() {
       timer.time++;
       let mins = Math.floor(timer.time/10/60);
@@ -46,7 +45,7 @@ let timer = {
     timer.$current.text('00:00:00');
   },
   resetBest : function() {
-    timer.bestTime = '';
+    timer.bestTime = '00:00:00';
     $('#best').text('00:00:00');
   }
 };

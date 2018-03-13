@@ -17,17 +17,17 @@ Array.prototype.shuffle = function() {
 }
 
 $stopResetBtn.on('click', () => {
+  timer.stop();
   if ($stopResetBtn.text() === "Stop") {
-    timer.stop();
     $stopResetBtn.text('Reset');
   } else {
-    game.resetAll();
-    timer.resetCurrent();
     timer.resetBest();
+    timer.resetCurrent();
+    game.reset();
     $('.difficulty-btn').removeAttr('disabled');
   }
 
-  e.preventDefault();
+  // e.preventDefault();
 });
 
 game.init();
