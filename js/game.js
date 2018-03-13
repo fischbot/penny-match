@@ -157,6 +157,7 @@ let game = {
   setupGrid : function(cols) {
     $stage.css({
       'grid-template-columns' : 'repeat(' + cols + ', minmax(45px, 100px))',
+      'padding': '30px 0 60px'
     });
   },
 // ============================================================================
