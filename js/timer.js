@@ -1,31 +1,43 @@
 let timer = {
-  t : null, // stores timer so it can be stopped
+  interval : null, // stores timer so it can be stopped
   time : 0,
+  mins : 0,
+  secs : 0,
+  cents : 0,
   bestTime : '00:00:00',
   currentTime : '',
   $current : $('#current'),
   start : function() {
-      timer.time++;
-      let mins = Math.floor(timer.time/10/60);
-      let secs = Math.floor(timer.time/10);
-      let tenths = timer.time % 10;
+    if (timer.time === 100) {
+      timer.time = 0;
+      timer.secs++;
+    }
 
-      if (mins < 10) {
-        mins = '0' + mins;
-      }
-      if (secs < 10) {
-        secs = '0' + secs;
-      }
+    if (timer.secs === 60) {
+      timer.mins++;
+      timer.secs = 0;
+    }
 
-      if (secs === 60) {
-        secs = '00';
-      }
+    if (timer.mins === 10) {
+      timer.stop();
+    }
 
-      timer.$current.text(`${mins}:${secs}:0${tenths}`);
+    timer.cents = timer.time;
+
+    timer.$current.text(`${timer.pad(timer.mins)}:${timer.pad(timer.secs)}:${timer.pad(timer.cents)}`);
+
+    timer.time++;
+  },
+  pad : function(n) {
+    return ('00' + n).substr(-2);
   },
   stop : function() {
-    clearInterval(timer.t);
+    clearInterval(timer.interval);
     timer.currentTime = timer.$current.text();
+    timer.mins = 0;
+    timer.secs = 0;
+    timer.cents = 0;
+    timer.time = 0;
   },
   compare : function() {
     if (timer.bestTime === '00:00:00') {

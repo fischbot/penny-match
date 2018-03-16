@@ -175,7 +175,7 @@ let game = {
    let id = event.target.id;
    if (game.firstClick) {
     // start timer
-    timer.t = setInterval(timer.start, 100);
+    timer.interval = setInterval(timer.start, 10);
     this.firstClick = false;
     if ($('#stop-reset-btn').text() === 'Stop') {
       $('#stop-reset-btn').text('Reset');
