@@ -17,7 +17,7 @@ let images = {
     });
   },
   getImages() {
-    let imageFolder = 'https://fischbot.github.io/penny-match/img/';
+    let imageFolder = 'https://robotspacefish.github.io/penny-match/img/';
     let imgsrc = '';
 
     for (let i = 1; i <= this.total; i++ ) {
