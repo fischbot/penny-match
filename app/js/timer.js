@@ -1,4 +1,4 @@
-let timer = {
+const timer = {
   interval : null, // stores timer so it can be stopped
   time : 0,
   mins : 0,
@@ -61,3 +61,5 @@ let timer = {
     $('#best').text('00:00:00');
   }
 };
+
+export default timer;

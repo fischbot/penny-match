@@ -1,26 +1,36 @@
-let game = {
-  difficulty : 0,
-  cols : 0,
-  win : false,
-  firstClick : true,
-// ============================================================================
-  bindEvents : function() {
-    $('button').off();
-    $stage.off();
-    $stage.on('click', '.image', this.update.bind(this));
-    $('.difficulty-btn').on('click', this.start.bind(this));
-    $('.play-again-btn').on('click', this.playAgain.bind(this));
-    $('#stop-reset-btn').on('click', this.stopReset.bind(this));
-  },
-// ============================================================================
-  init : function() {
-    this.bindEvents();
+import images from './images.js';
+import timer from './timer.js';
+
+class Game {
+  constructor() {
+    this.difficulty = 0;
+    this.cols = 0;
+    this.win = false;
+    this.firstClick = true;
+    this.stage = $('#stage');
+    this.rules = $('#rules');
+    this.difficultyBtn = $('.difficulty-btn');
+    this.stopResetBtn = $('.stop-reset-btn');
+    this.playAgainBtn = $('.play-again-btn');
+    this.timerDisplay = $('#timer');
     images.getImages();
-    $('#timer').hide();
-    $('#stop-reset-btn').hide();
-  },
+    this.timerDisplay.hide();
+    this.stopResetBtn.hide();
+
+    this.bindEvents();
+    console.log('game starting...');
+  }
 // ============================================================================
-  checkForMatch : function() { // TODO refactor
+  bindEvents() {
+    $('button').off();
+    this.stage.off();
+    this.stage.on('click', '.image', this.update.bind(this));
+    this.difficultyBtn.on('click', this.start.bind(this));
+    this.playAgainBtn.on('click', this.playAgain.bind(this));
+    this.stopResetBtn.on('click', this.stopReset.bind(this));
+  }
+// ============================================================================
+  checkForMatch() {
     let src1 = images.flipped[0].src;
     let src2 = images.flipped[1].src;
     let id1 = images.flipped[0].id;
@@ -55,17 +65,17 @@ let game = {
 
     images.flippedCount = 0;
     images.flipped = [];
-  },
+  }
 // ============================================================================
-  gameOver : function() {
+  gameOver() {
     if (this.win === true) {
       $('.message').text('You Win!');
       $('#stop-reset-btn').attr('disabled', 'true');
     }
     $('#play-again').show();
-  },
+  }
 // ============================================================================
-  playAgain : function(event) {
+  playAgain(event) {
     let btnID = event.target.id;
     switch (btnID) {
       case 'yes':
@@ -79,14 +89,13 @@ let game = {
       case 'no':
         $('#play-again').hide();
         $('#stop-reset-btn').hide();
-        $stage.remove();
+        this.stage.remove();
         $('main .container').append('<p class="message" id="thanks" style="padding-top:0">Thanks for  playing!</h2>');
         break;
     }
-
-  },
-// ============================================================================
-  reset : function() {
+  }
+// reset ======================================================================
+  reset() {
     images.random = [];
     images.shuffled = [];
     images.flippedCount = 0;
@@ -94,57 +103,62 @@ let game = {
     images.matched = 0;
     this.win = false;
     this.firstClick = true;
-    $stage.empty();
-  },
-// ============================================================================
-  setActiveBtnColor : function(btnID) {
-    $('.difficulty-btn').removeClass('active');
+    this.stage.empty();
+  }
+// setActiveBtnColor ==========================================================
+  setActiveBtnColor(btnID) {
+    this.difficultyBtn.removeClass('active');
     $(`#${btnID}`).addClass('active');
-  },
-// ============================================================================
-  setDifficulty : function(btnID) {
+  }
+// setDifficulty ==============================================================
+  setDifficulty(btnID) {
     switch (btnID) {
       case 'easy':
-        setting.easy();
+        this.difficulty = 6;
+        this.cols = 4;
         break;
       case 'medium':
-        setting.medium();
+        this.difficulty = 12;
+        this.cols = 4;
         break;
       case 'hard':
-        setting.hard();
+        this.difficulty = 20;
+        this.cols = 5;
         break;
-      case 'debug':
-        setting.debug();
-        break;
+      // case 'debug':
+      //   this.difficulty = 1;
+      //   this.cols = 2;
+      //   break;
       default :
         console.log('Something went wrong');
     }
-  },
-// ============================================================================
-  setupGrid : function(cols) {
-    $stage.css({
+  }
+// setupGrid ==================================================================
+  setupGrid(cols) {
+    this.stage.css({
       'grid-template-columns' : 'repeat(' + cols + ', minmax(45px, 100px))',
       'padding': '30px 0 60px'
     });
-  },
-// ============================================================================
-  setupImageTagsinStage : function() {
+  }
+// setupImageTagsinStage ======================================================
+  setupImageTagsinStage() {
     for (let i = 0; i < this.difficulty*2; i++) {
-      $stage.append('<div class="img-container"><img class="image"></img></div>');
+      this.stage.append('<div class="img-container"><img class="image"></img></div>');
     }
-  },
-// ============================================================================
-  setupStageAndValues : function() {
+  }
+// setupStageAndValues ========================================================
+  setupStageAndValues() {
     this.setupGrid(this.cols);
     images.randomImagesToArray(this.difficulty);
     this.setupImageTagsinStage();
     images.shuffleImgs();
     images.setTagValues();
-    $('#timer').show();
-  },
-// ============================================================================
-  start : function(event) {
-    $rules.hide(); // TODO move this to another function or rename this one?
+    this.timerDisplay.show();
+  }
+// start ======================================================================
+  start(event) {
+    debugger;
+    this.rules.hide(); // TODO move this to another function or rename this one?
 
     let btnID = event.target.id;
     // if grid exists, clear stage children before setting new grid
@@ -155,32 +169,32 @@ let game = {
     this.setDifficulty(btnID);
     this.setActiveBtnColor(btnID);
     this.setupStageAndValues();
-    $('#stop-reset-btn').show();
-    $('.difficulty-btn').attr('disabled', 'true');
-  },
-// ============================================================================
-  stopReset : function() {
+    this.stopResetBtn.show();
+    this.difficultyBtn.attr('disabled', 'true');
+  }
+// stopReset ==================================================================
+  stopReset() {
     timer.stop();
-    if ($stopResetBtn.text() === "Stop") {
-      $stopResetBtn.text('Reset');
+    if (this.stopResetBtn.text() === "Stop") {
+      this.stopResetBtn.text('Reset');
     } else {
       timer.resetBest();
       timer.resetCurrent();
-      game.reset();
-      $('.difficulty-btn').removeAttr('disabled');
+      this.reset();
+      this.difficultyBtn.removeAttr('disabled');
     }
-  },
-// ============================================================================
-  update : function(event) {
+  }
+// update =====================================================================
+  update(event) {
    let id = event.target.id;
-   if (game.firstClick) {
+   if (this.firstClick) {
     // start timer
     timer.interval = setInterval(timer.start, 10);
     this.firstClick = false;
-    if ($('#stop-reset-btn').text() === 'Stop') {
-      $('#stop-reset-btn').text('Reset');
+    if (this.stopResetBtn.text() === 'Stop') {
+      this.stopResetBtn.text('Reset');
     } else {
-      $('#stop-reset-btn').text('Stop');
+      this.stopResetBtn.text('Stop');
     }
    }
    // proceed only if clicked image isn't already matched
@@ -200,7 +214,9 @@ let game = {
      }
     }
     if (images.flippedCount === 2) {
-     game.checkForMatch();
+     this.checkForMatch();
     }
-  },
-};
+  }
+}
+
+export default Game;

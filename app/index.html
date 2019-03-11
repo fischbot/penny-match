@@ -6,11 +6,8 @@
         <title>Penny Matching</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Walter+Turncoat" rel="stylesheet">
-
         <link rel="stylesheet" href="css/main.css">
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
@@ -67,15 +64,6 @@
           </footer>
         </div>
         <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-        <script src="js/vendor/LAB.min.js"></script>
-        <script>
-          $LAB.script("js/images.js").wait()
-          .script("js/timer.js").wait()
-          .script("js/setting.js").wait()
-          .script("js/game.js").wait()
-          .script("js/main.js").wait(function() {
-            game.init();
-          });
-        </script>
+        <script type="module" src="./js/main.js"></script>
     </body>
 </html>

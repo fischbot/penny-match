@@ -1,4 +1,4 @@
-let images = {
+const images = {
   total : 60,
   pool : [],
   random : [],
@@ -27,7 +27,7 @@ let images = {
   },
   randomImagesToArray : function() {
     let imgs = [];
-    for (let i = 0; i < game.difficulty; i++) {
+    for (let i = 0; i < this.difficulty; i++) {
       let img = this.randomImgFromPool();
       // check to make sure randomImgs doesn't already contain the image
       while (imgs.indexOf(img) !== -1) {
@@ -45,3 +45,17 @@ let images = {
     return this.pool[Math.floor(Math.random() * (this.total - 1) + 1)];
   }
 };
+
+// Fisher-Yates shuffle
+Array.prototype.shuffle = function() {
+  let i = this.length, j, temp;
+  while (--i > 0) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = this[j];
+    this[j] = this[i];
+    this[i] = temp;
+  }
+  return this;
+}
+
+export default images;
